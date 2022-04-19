@@ -12,13 +12,12 @@ const mostrarProductos = () => {
             A) Remera Nike - $ 2000\n 
             B) Remera Adidas - $ 1800\n 
             C) Pantalon Nike - $ 3500\n 
-            D) Campera Umbro - $ 4900`);
+            D) Campera Umbro - $ 4900`).toUpperCase();
     if (
       idProd === "" ||
       (idProd != "A" && idProd != "B" && idProd != "C" && idProd != "D")
-    ) {
+    )
       alert("Ingrese una opción correcta");
-    }
   } while (
     idProd === "" ||
     (idProd != "A" && idProd != "B" && idProd != "C" && idProd != "D")
@@ -57,8 +56,7 @@ const mostrarProductos = () => {
 
 const preguntarContinuar = () => {
   let seguirComprando = confirm("¿Desea seguir comprando?");
-  if (seguirComprando) mostrarProductos();
-  else informarCompra();
+  seguirComprando ? mostrarProductos() : informarCompra();
 };
 
 const informarCompra = () => {
@@ -74,7 +72,7 @@ const informarCompra = () => {
   Gracias por su compra!`);
 
   document.write(`<h2>RESUMEN:</h2>
-  <ol>${resumen}</ol>`);
+  <ul>${resumen}</ul>`);
   document.write(`<h3><span>IVA</span>: $ ${iva}</h3>`);
   document.write(`<h2><span>TOTAL</span>: $ ${total}</h2>`);
   document.write("<h3>Gracias por su compra!</h3>");
