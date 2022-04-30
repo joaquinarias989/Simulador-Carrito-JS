@@ -1,4 +1,4 @@
-# Desafio 1 Coder JS - Simulador Interactivo
+# Simulador Interactivo - Curso JS Coder
 
 ## Simulador Carrito de Compras.-
 
