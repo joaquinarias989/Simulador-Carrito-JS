@@ -89,7 +89,9 @@ const init = () => {
       console.log("-----RESUMEN-----");
       mostrarProductos();
     } else {
-      alert("Contraseña incorrecta");
+      alert(
+        "Ha superado el límite de intentos para iniciar sesión. Reintente en unos minutos"
+      );
     }
   } else if (user == 2) {
     alert(
@@ -122,25 +124,83 @@ const sign = () => {
 
   switch (user) {
     case usuarios[0].id:
-      pass = prompt(`${usuarios[0].nombre} ingresa tu contraseña:`);
-      if (pass != usuarios[0].contraseña) return false;
-      else {
-        usuarioLogueado = usuarios[0].nombre;
-        return true;
+      for (let i = 1; i <= 3; i++) {
+        pass = prompt(`${usuarios[0].nombre} ingresa tu contraseña:`);
+        if (pass != usuarios[0].contraseña && i < 3)
+          alert("Contraseña incorrecta. Intente nuevamente.");
+        else if (pass != usuarios[0].contraseña && i == 3) return false;
+        else {
+          usuarioLogueado = usuarios[0].nombre;
+          return true;
+        }
       }
+      return false;
+
     case usuarios[1].id:
-      pass = prompt(`${usuarios[1].nombre} ingresa tu contraseña:`);
-      if (pass != usuarios[1].contraseña) return false;
-      else {
-        usuarioLogueado = usuarios[1].nombre;
-        return true;
+      for (let i = 1; i <= 3; i++) {
+        pass = prompt(`${usuarios[0].nombre} ingresa tu contraseña:`);
+        if (pass != usuarios[0].contraseña && i < 3)
+          alert("Contraseña incorrecta. Intente nuevamente.");
+        else if (pass != usuarios[0].contraseña && i == 3) return false;
+        else {
+          usuarioLogueado = usuarios[0].nombre;
+          return true;
+        }
       }
+      return false;
+
     case "NUEVO":
+      let idNuevoUsuario = "";
+      let nombreNuevoUsuario = "";
+      let emailNuevoUsuario = "";
+      let passwNuevoUsuario = "";
+
+      do {
+        idNuevoUsuario = prompt(
+          "Ingrese un identificador/apodo de su Usuario"
+        ).toUpperCase();
+        if (
+          idNuevoUsuario.trim().length < 2 ||
+          idNuevoUsuario.trim().length > 5
+        )
+          alert("Ingrese ente 2 y 5 caracteres");
+        else if (!isNaN(idNuevoUsuario)) alert("Ingrese letras y/o números");
+      } while (
+        idNuevoUsuario.trim().length < 2 ||
+        idNuevoUsuario.trim().length > 5 ||
+        !isNaN(idNuevoUsuario)
+      );
+
+      do {
+        nombreNuevoUsuario = prompt("Ingrese su Nombre completo:");
+        if (
+          nombreNuevoUsuario.trim().length < 2 ||
+          nombreNuevoUsuario.trim().length > 50
+        )
+          alert("Ingrese ente 2 y 50 letras");
+        else if (!isNaN(nombreNuevoUsuario)) alert("Ingrese sólo letras");
+      } while (
+        nombreNuevoUsuario.trim().length < 2 ||
+        nombreNuevoUsuario.trim().length > 50 ||
+        !isNaN(nombreNuevoUsuario)
+      );
+
+      do {
+        emailNuevoUsuario = prompt("Email:");
+        if (!emailNuevoUsuario.includes("@")) alert("Ingrese un email válido");
+      } while (!emailNuevoUsuario.includes("@"));
+
+      do {
+        passwNuevoUsuario = prompt("Contraseña:");
+        if (passwNuevoUsuario.trim().length < 3)
+          alert("ingrese como mínimo 3 caracteres");
+      } while (passwNuevoUsuario.trim().length < 3);
+
       const nuevoUsuario = new Usuario(
-        prompt("Ingrese un identificador de su Usuario").toUpperCase(),
-        prompt("Ingrese su Nombre completo:"),
-        prompt("Email:"),
-        prompt("Contraseña:")
+        idNuevoUsuario,
+        nombreNuevoUsuario,
+        emailNuevoUsuario,
+        passwNuevoUsuario
       );
       usuarios.push(nuevoUsuario);
       console.log(
