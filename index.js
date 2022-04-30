@@ -1,7 +1,8 @@
+let usuarioLogueado = "";
 let precio = 0;
 let subtotal = 0;
 let total = 0;
-let resumen = "";
+let resumenHtml = "";
 
 class Usuario {
   constructor(id, nombre, email, contraseña) {
@@ -124,12 +125,14 @@ const sign = () => {
       pass = prompt(`${usuarios[0].nombre} ingresa tu contraseña:`);
       if (pass != usuarios[0].contraseña) return false;
       else {
+        usuarioLogueado = usuarios[0].nombre;
         return true;
       }
     case usuarios[1].id:
       pass = prompt(`${usuarios[1].nombre} ingresa tu contraseña:`);
       if (pass != usuarios[1].contraseña) return false;
       else {
+        usuarioLogueado = usuarios[1].nombre;
         return true;
       }
     case "NUEVO":
@@ -145,6 +148,7 @@ const sign = () => {
           usuarios[usuarios.length - 1].nombre
         }`
       );
+      usuarioLogueado = usuarios[usuarios.length - 1].nombre;
       return true;
   }
 };
@@ -154,7 +158,7 @@ const mostrarProductos = () => {
   let agregaProd = true;
 
   do {
-    idProd = prompt(`¿Qué producto desea llevar?\n
+    idProd = prompt(`Hola ${usuarioLogueado} ¿qué producto deseas llevar?\n
             A) ${productos[0].nombre} - Talle ${productos[0].talle} - $ ${productos[0].precio} - Stock: ${productos[0].stock}\n 
             B) ${productos[1].nombre} - Talle ${productos[1].talle} - $ ${productos[1].precio} - Stock: ${productos[1].stock}\n 
             C) ${productos[2].nombre} - Talle ${productos[2].talle} - $ ${productos[2].precio} - Stock: ${productos[2].stock}\n 
@@ -200,7 +204,7 @@ const mostrarProductos = () => {
     subtotal += carrito[carrito.length - 1].precio;
     console.log(`SUBTOTAL: ${subtotal}`);
 
-    resumen += `<li>${carrito[carrito.length - 1].nombre}: $ ${
+    resumenHtml += `<li>${carrito[carrito.length - 1].nombre}: $ ${
       carrito[carrito.length - 1].precio
     }</li>`;
   }
@@ -214,19 +218,25 @@ const preguntarContinuar = () => {
 };
 
 const informarCompra = () => {
+  let carritoResumen = "";
+  for (let ite of carrito) {
+    carritoResumen += `${ite.nombre} - ${ite.precio}\n`;
+  }
   let iva = subtotal * 0.21;
   total = subtotal + iva;
 
   console.log(`Iva 21%: ${iva}`);
   console.log(`TOTAL: ${total}`);
 
-  alert(`El total de sus productos es: $ ${subtotal}.\n 
-  El IVA cobrado es de: $ ${iva}\n
-  El Total de su compra es de: $ ${total}\n
-  Gracias por su compra!`);
+  alert(`RESUMEN:\n
+  ${carritoResumen}
+  SUBTOTAL: $ ${subtotal}.\n 
+  Iva: $ ${iva}\n
+  TOTAL: $ ${total}\n
+  ¡Gracias ${usuarioLogueado} por comprar en STREETWEAR!\n`);
 
   document.write(`<h2>RESUMEN:</h2>
-  <ul>${resumen}</ul>`);
+  <ul>${resumenHtml}</ul>`);
   document.write(`<h3><span>IVA</span>: $ ${iva}</h3>`);
   document.write(`<h2><span>TOTAL</span>: $ ${total}</h2>`);
   document.write("<h3>Gracias por su compra!</h3>");
