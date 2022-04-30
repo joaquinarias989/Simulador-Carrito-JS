@@ -138,12 +138,12 @@ const sign = () => {
 
     case usuarios[1].id:
       for (let i = 1; i <= 3; i++) {
-        pass = prompt(`${usuarios[0].nombre} ingresa tu contraseña:`);
-        if (pass != usuarios[0].contraseña && i < 3)
+        pass = prompt(`${usuarios[1].nombre} ingresa tu contraseña:`);
+        if (pass != usuarios[1].contraseña && i < 3)
           alert("Contraseña incorrecta. Intente nuevamente.");
-        else if (pass != usuarios[0].contraseña && i == 3) return false;
+        else if (pass != usuarios[1].contraseña && i == 3) return false;
         else {
-          usuarioLogueado = usuarios[0].nombre;
+          usuarioLogueado = usuarios[1].nombre;
           return true;
         }
       }
