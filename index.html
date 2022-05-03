@@ -1,41 +1,481 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrito de Compras | STREETWEAR</title>
+    <meta
+      name="description"
+      content="Tienda de ropa urbana en la que encontrarás todo lo necesario para vestirte como siempre quisiste, desde remeras, abrigos y hasta accesorios, para lucir un outfit perfecto."
+    />
+    <meta
+      name="keywords"
+      content="ropa, streetwear, remeras, buzos, hoodies, camperas, abrigos, pantalones, bermudas, shorts, medias, zapatillas, accesorios, urbano, deportivo, elegante, outfit"
+    />
+    <title>STREETWEAR</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.svg" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./assets/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./assets/css/index.css" />
+    <link rel="stylesheet" href="./assets/css/aos.css" />
   </head>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      background: #fff7c3;
-      color: #352d00;
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      text-align: center;
-    }
-    h1 {
-      background: #ffdb0d;
-      padding: 0.5rem 2rem;
-    }
-    span {
-      text-decoration: underline;
-    }
-  </style>
   <body>
-    <h1>CARRITO DE COMPRAS</h1>
+    <header class="bg-bricks">
+      <nav class="navbar container flex-row navbar-expand-lg navbar-light">
+        <a href="index.html">
+          <picture class="logo flex-row">
+            <img
+              src="./assets/img/logo.svg"
+              alt="Logo de la tienda StreetWear, en color blanco y amarillo"
+              width="100%"
+              height="100%"
+            />
+          </picture>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          id="btnMenu"
+        >
+          <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-lg-auto">
+            <li>
+              <a href="./assets/pages/products.html" class="menu__link"
+                >Productos</a
+              >
+            </li>
+            <li><a href="#help" class="menu__link">Ayuda</a></li>
+            <li>
+              <a href="#about" class="menu__link">Nosotros</a>
+            </li>
+            <li>
+              <a href="#contact" class="menu__link">Contacto</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav mb-2 mb-lg-0 flex-row jc-between">
+            <li class="dropdown-link">
+              <a class="menu__link" role="button" aria-label="Cuenta de Usuario"
+                ><i class="fas fa-user text-white"></i
+              ></a>
+              <ul class="sub-menu bg-bricks">
+                <li>
+                  <a href="./assets/pages/login.html" class="menu__link"
+                    >Ingresar</a
+                  >
+                </li>
+                <li>
+                  <a href="./assets/pages/register.html" class="menu__link"
+                    >Registrarse</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="./assets/pages/cart.html"
+                class="menu__link"
+                aria-label="Carrito de compras"
+                ><i class="fas fa-shopping-bag text-white"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="bg-bricks">
+      <section id="welcome" class="welcome">
+        <a
+          type="button"
+          class="btn-principal"
+          href="./assets/pages/products.html"
+          ><i class="fas fa-shopping-bag me-2"></i> Comprar ahora</a
+        >
+      </section>
+
+      <section id="categories" class="categories container">
+        <div class="flex-row" data-aos="fade-right" data-aos-duration="1000">
+          <article class="flex-column">
+            <img
+              src="./assets/img/hanger.svg"
+              alt="Percha de madera clara"
+              width="100%"
+              height="100%"
+            />
+            <button class="btn-secundario">Abrigos</button>
+          </article>
+          <article class="flex-column">
+            <img
+              src="./assets/img/hanger.svg"
+              alt="Percha de madera clara"
+              width="100%"
+              height="100%"
+            />
+            <button class="btn-secundario">Remeras</button>
+          </article>
+          <article class="flex-column">
+            <img
+              src="./assets/img/hanger.svg"
+              alt="Percha de madera clara"
+              width="100%"
+              height="100%"
+            />
+            <button class="btn-secundario">Pantalones</button>
+          </article>
+        </div>
+        <div class="flex-row mt-5" data-aos="fade-up" data-aos-duration="1000">
+          <a
+            href="./assets/pages/products.html"
+            type="button"
+            class="btn-principal"
+            >Ver todos los productos</a
+          >
+        </div>
+      </section>
+
+      <section id="help" class="help container">
+        <div
+          class="row align-items-center justify-content-between flex-wrap-reverse"
+        >
+          <div
+            class="help__icons col-xl-3 d-flex flex-xl-column justify-content-center align-items-center flex-wrap"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
+            <i class="fas fa-shopping-cart"></i>
+            <i class="fas fa-question"></i>
+          </div>
+          <article
+            class="help__content col-xl-9 d-flex flex-column justify-content-end align-items-end"
+            data-aos="fade-left"
+            data-aos-duration="1000"
+          >
+            <h2 class="title-primary">¿Cómo compro?</h2>
+            <div class="help__list">
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">1</span>
+                <p>
+                  Elegí el producto, el talle, y hacé click en Agregar al
+                  carrito.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-down"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">2</span>
+                <p>
+                  Si querés, podes seguir agregando otros productos al carrito,
+                  sino, hacé clic en Iniciar Compra. En este paso vas a poder
+                  calcular el costo de envío.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-right"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">3</span>
+                <p>
+                  Completá tus datos de contacto (y de facturación en caso de
+                  que lo requieras) y hacé clic en Continuar.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-left"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">4</span>
+                <p>
+                  Seleccioná el método de envío que desees (envíos a todo el
+                  país por Correo o A Coordinar), completá los datos del mismo y
+                  hacé clic en Continuar.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">5</span>
+                <p>
+                  Elegí el método de pago que prefieras (para Efectivo
+                  seleccioná Pago Fácil o Rapipago), rellená los datos
+                  solicitados para realizar la compra y hacé clic en Finalizar.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row my-3 my-sm-0"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">6</span>
+                <p>
+                  ¡Listo! Revisá tu correo, en unos minutos va a llegar toda la
+                  información correspondiente a tu compra y el envío de la
+                  misma.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="about" class="about container">
+        <div class="row align-items-center justify-content-between">
+          <article
+            class="about__content col-md-8 col-lg-7 d-flex flex-column align-items-start"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
+            <h2 class="title-primary">¿Quiénes Somos?</h2>
+            <div class="accordion__paper ms-md-5" id="accordionExample">
+              <div>
+                <h3 id="headingOne">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    <span class="text-overline">Nosotros</span>
+                  </button>
+                </h3>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse show"
+                  aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample"
+                >
+                  <p>
+                    Diego Percaz y todo el equipo, de Arroyito Córdoba para todo
+                    el mundo. En la constante búsqueda de
+                    <strong>prendas únicas</strong> e increíbles.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-5">
+                <h3 id="headingTwo">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    <span class="text-overline">Inicios</span>
+                  </button>
+                </h3>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample"
+                >
+                  <p>
+                    Arrancamos con el objetivo de traer a nuestro pueblo,
+                    prendas que no se conseguían accesiblemente, y de estilos
+                    que no eran muy populares en la zona. Gracias a esto,
+                    conocimos varios lugares del país y nos familiarizamos con
+                    el mundo de la
+                    <strong>moda urbana</strong>.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-5">
+                <h3 id="headingThree">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                    <span class="text-overline">Actualidad</span>
+                  </button>
+                </h3>
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingThree"
+                  data-bs-parent="#accordionExample"
+                >
+                  <p>
+                    Ahora nuestros clientes objetivos no son sólo de nuestro
+                    pueblo, sino que logramos una <strong>fidelidad</strong> con
+                    amigos de todo el país. Como planes a futuro tenemos pensado
+                    incursionar en el mundo del diseño y fabricación de prendas
+                    propias.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <div
+            class="about__icons col-md-3 col-lg-4 d-flex flex-md-column justify-content-center align-items-center flex-wrap"
+            data-aos="fade-left"
+            data-aos-duration="1000"
+          >
+            <img
+              src="./assets/img/logo.svg"
+              alt="Logo de la tienda StreetWear en color blanco y amarillo"
+              width="100%"
+              height="100%"
+            />
+            <i class="fas fa-info"></i>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact container">
+        <div
+          class="row justify-content-between justify-content-center align-items-center"
+        >
+          <article
+            class="contact__form col-lg-6 d-flex justify-content-center align-items-center mb-5 mb-lg-0"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            <h2 class="title-primary vertical">Contactános</h2>
+            <form
+              class="form__paper"
+              data-aos="zoom-in"
+              data-aos-duration="1000"
+            >
+              <div class="input__box">
+                <label for="name" class="form__label">Nombre y Apellido</label>
+                <input type="text" id="name" class="form__input" required="" />
+              </div>
+              <div class="input__box">
+                <label for="email" class="form__label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form__input"
+                  required=""
+                />
+              </div>
+              <div class="input__box">
+                <label for="message" class="form__label">Mensaje</label>
+                <textarea
+                  id="message"
+                  class="form__input"
+                  rows="6"
+                  column="10"
+                  required=""
+                ></textarea>
+              </div>
+              <button type="submit" class="btn-principal">
+                <i class="fa fa-paper-plane"></i> Enviar
+              </button>
+            </form>
+          </article>
+
+          <article
+            class="contact__location col-lg-5 d-flex justify-content-center align-items-center mt-5 mt-lg-0"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            <div class="iframe__container">
+              <div class="iframe__box">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2024.4648465779292!2d-63.0508337415102!3d-31.421551452447495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94334dd9def7613f%3A0xda264072985ac5f3!2sRivadavia%20286%2C%20X2434%20Arroyito%2C%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1649901013386!5m2!1ses-419!2sar"
+                  title="Ubicacion"
+                  width="100%"
+                  height="100%"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <span></span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__info flex-column flex-md-row">
+          <a href="./index.html" aria-label="Navegar a la página de Inicio"
+            ><i class="fas fa-home"></i
+          ></a>
+
+          <div class="footer__payment flex-column">
+            <strong>Todos los métodos de pago</strong>
+            <div class="icons flex-row">
+              <i class="fa fa-credit-card"></i>
+              <i class="fab fa-bitcoin"></i>
+              <i class="fa fa-money-bill-alt"></i>
+            </div>
+          </div>
+          <div class="footer__logo flex-column">
+            <span>STREET</span>
+            <span>WEAR</span>
+          </div>
+          <p>&copy; 2022 Derechos Reservados</p>
+
+          <a href="#" aria-label="Ir al comienzo de la página"
+            ><i class="fas fa-arrow-up"></i
+          ></a>
+        </div>
+
+        <div class="footer__social flex-row">
+          <a
+            href="https://www.facebook.com"
+            class="fab fa-facebook"
+            target="_blank"
+            aria-label="Facebook"
+          ></a>
+          <a
+            href="https://www.instagram.com/streetwear1__/"
+            class="fab fa-instagram"
+            target="_blank"
+            aria-label="Instagram"
+          ></a>
+          <a
+            href="https://www.twitter.com"
+            class="fab fa-twitter"
+            target="_blank"
+            aria-label="Twitter"
+          ></a>
+          <a
+            href="#"
+            class="fa fa-share"
+            target="_blank"
+            aria-label="Compartir"
+          ></a>
+        </div>
+      </div>
+    </footer>
   </body>
 
-  <script src="./index.js"></script>
+  <script src="./assets/js/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="./assets/js/bootstrap.bundle.min.js"></script>
 </html>
