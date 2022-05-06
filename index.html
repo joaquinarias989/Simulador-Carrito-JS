@@ -78,7 +78,7 @@
               </ul>
             </li>
             <li>
-              <a href="cart.html" class="menu__link menu__link--active"
+              <a href="index.html" class="menu__link menu__link--active"
                 ><i class="fas fa-shopping-bag text-white"></i
               ></a>
             </li>
@@ -88,6 +88,121 @@
     </header>
 
     <main>
+      <section id="products" class="products container">
+        <div class="section__header row">
+          <div class="col-md-10">
+            <h1 class="title-primary">Productos</h1>
+            <!-- <ol class="breadcrumb">
+              <li><a href="../../index.html">Inicio</a></li>
+              <li>Productos</li>
+            </ol> -->
+          </div>
+          <div class="col-md-2 d-flex justify-content-end align-items-start">
+            <div class="btn-group">
+              <button
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label="Filtrar productos"
+              >
+                <i class="fa fa-filter"></i>
+              </button>
+              <div class="dropdown-menu p-4">
+                <h5 class="text-center mb-4">¿Qué estás buscando?</h5>
+                <ul class="mt-3">
+                  <p class="mb-1 fw-bold position-relative text-overline">
+                    Categoría
+                  </p>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    Remeras
+                  </li>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    Pantalones
+                  </li>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    Buzos
+                  </li>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    Camperas
+                  </li>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    Accesorios
+                  </li>
+                </ul>
+                <ul class="mt-3">
+                  <p class="mb-1 fw-bold position-relative text-overline">
+                    Talle
+                  </p>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    S
+                  </li>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    M
+                  </li>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    L
+                  </li>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    XL
+                  </li>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    XXL
+                  </li>
+                  <li>
+                    <input class="form-check-input me-1" type="checkbox" />
+                    Oversize
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="products__list d-flex justify-content-evenly justify-content-md-start"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        >
+          <template id="product-card"
+            ><article class="product__card">
+              <a>
+                <div class="product__card__img">
+                  <img alt="" />
+                </div>
+                <div class="product__card__info">
+                  <h4 class="product__card__title"></h4>
+                  <h4 class="product__card__price"></h4>
+                  <div class="product__card__btn flex-row">
+                    <button
+                      class="btn-cart"
+                      aria-label="Agregar producto al carrito"
+                    >
+                      Agregar al carrito <i class="fa fa-cart-plus"></i>
+                    </button>
+                    <span id="alertOK">Producto agregado con éxito!</span>
+                  </div>
+                </div>
+              </a>
+            </article></template
+          >
+        </div>
+
+        <div class="flex-row jc-center algn-items-center">
+          <button class="btn-principal" aria-label="Cargar más productos">
+            <i class="fas fa-plus"></i> Cargar más
+          </button>
+        </div>
+      </section>
       <section
         id="cart"
         class="cart container"
@@ -142,12 +257,12 @@
                     class="accordion-collapse collapse show"
                     aria-labelledby="panelsStayOpen-headingTwo"
                   >
-                    <!-- <p class="text-end">
+                    <p class="text-end">
                       ¿Ya tenes cuenta?
                       <a href="./login.html" class="text-accent"
                         >¡Iniciá sesión!</a
                       >
-                    </p> -->
+                    </p>
                     <input
                       type="email"
                       name="email"
@@ -257,14 +372,18 @@
             class="cart__resume ps-md-5 ps-xl-0 col-md-6 col-xl-4 flex-column"
           >
             <div class="cart__resume__products flex-column">
-              <template id="template-product">
+              <template id="product-cart">
                 <div class="cart__product">
                   <div class="cart__product__img">
                     <img src="./assets/img/img-ejemplo.png" />
                   </div>
                   <div class="cart__product__info">
                     <h3 class="text-underlined" id="product__name"></h3>
-                    <p></p>
+                    <p id="details"></p>
+                    <div class="d-flex">
+                      <p>Cantidad:</p>
+                      <input type="number" class="input-quantity" min="0" />
+                    </div>
                     <h3 id="price"></h3>
                   </div>
                 </div>
@@ -289,93 +408,6 @@
         </div>
       </section>
     </main>
-
-    <section id="interes" class="interes bg-bricks">
-      <div class="container">
-        <h2 class="title-secondary">Quizá quieras agregar...</h2>
-        <div
-          class="interes__slide flex-row"
-          data-aos="fade-right"
-          data-aos-duration="1000"
-        >
-          <article class="product__card">
-            <a href="./product.html">
-              <div class="product__card__img">
-                <img
-                  loading="lazy"
-                  src="./assets/img/tshirt-2.webp"
-                  alt="Hombre parado, de espaldas, con las manos atrás, vistiendo una remera negra con una estampa en la espalda"
-                />
-              </div>
-              <div class="product__card__info">
-                <h4 class="product__card__title">Remera Risks & Dreams</h4>
-                <h4 class="product__card__price">$ 2499</h4>
-                <div class="product__card__btn flex-row">
-                  <button
-                    class="btn-cart"
-                    aria-label="Agregar producto al carrito"
-                  >
-                    Agregar al carrito
-                    <i class="fa fa-cart-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </a>
-          </article>
-          <article class="product__card ganga">
-            <span class="offer">GANGA!</span>
-
-            <a href="./product.html">
-              <div class="product__card__img">
-                <img
-                  loading="lazy"
-                  src="./assets/img/campera.webp"
-                  alt="Hombre parado mirando hacia el frente, vistiendo una campera bomber negra"
-                />
-              </div>
-              <div class="product__card__info">
-                <h4 class="product__card__title">Jacket Bomber</h4>
-                <h4 class="product__card__price">$ 3700<span>$ 5000</span></h4>
-
-                <div class="product__card__btn flex-row">
-                  <button
-                    class="btn-cart"
-                    aria-label="Agregar producto al carrito"
-                  >
-                    Agregar al carrito
-                    <i class="fa fa-cart-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </a>
-          </article>
-          <article class="product__card">
-            <a href="./product.html">
-              <div class="product__card__img">
-                <img
-                  loading="lazy"
-                  src="./assets/img/buzo-2.webp"
-                  alt="Hombre parado de espaldas, vistiendo un buzo con capucha amarillo, con una estampa en la espalda de una calavera mordiendo una rosa."
-                />
-              </div>
-              <div class="product__card__info">
-                <h4 class="product__card__title">Buzo Rose</h4>
-                <h4 class="product__card__price">$ 4900</h4>
-                <div class="product__card__btn flex-row">
-                  <button
-                    class="btn-cart"
-                    aria-label="Agregar producto al carrito"
-                  >
-                    Agregar al carrito
-                    <i class="fa fa-cart-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
 
     <footer class="footer">
       <div class="container">

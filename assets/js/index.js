@@ -1,13 +1,26 @@
 ////////////////////// CLASES
 
 class Producto {
-  constructor(nombre, precio, descripcion, color, talle, stock) {
+  constructor(
+    id,
+    nombre,
+    precio,
+    descripcion,
+    color,
+    talle,
+    stock,
+    img,
+    cantidad
+  ) {
+    this.id = id;
     this.nombre = nombre;
     this.precio = precio;
     this.descripcion = descripcion;
     this.color = color;
     this.talle = talle;
     this.stock = stock;
+    this.img = img;
+    this.cantidad = cantidad;
   }
 }
 
@@ -23,36 +36,48 @@ class Usuario {
 ////////////////////// Productos de prueba
 
 const prod1 = new Producto(
+  "RMPN",
   "Remera Phenomenally",
   2380,
   "Lorem ipsum dolor",
   "Negro",
   "M",
-  2
+  2,
+  "./assets/img/shirt-yellow.webp",
+  0
 );
 const prod2 = new Producto(
+  "RRDA",
   "Remera Risks & Dreams",
   2499,
   "Lorem ipsum dolor",
   "Amarillo",
   "XL",
-  3
+  3,
+  "./assets/img/tshirt-2.webp",
+  0
 );
 const prod3 = new Producto(
+  "BCN",
   "Buzo Chineze",
   4630,
   "Lorem ipsum dolor",
   "Negro",
   "L",
-  2
+  2,
+  "./assets/img/buzo.webp",
+  0
 );
 const prod4 = new Producto(
+  "JBN",
   "Jacket Bomber",
-  3700,
+  5500,
   "Lorem ipsum dolor",
   "Negro",
   "S",
-  2
+  2,
+  "./assets/img/campera.webp",
+  0
 );
 
 ////////////////////// Usuarios de prueba
@@ -70,280 +95,152 @@ const usuario2 = new Usuario(
   "fede123"
 );
 
-////////////////////// Variables, Arrays, DOM
+////////////////////// Arrays, Variables,  DOM
 
-let usuarios = [usuario1, usuario2];
-let productos = [prod1, prod2, prod3, prod4];
-let carrito = [];
+let users = [usuario1, usuario2];
+let products = [prod1, prod2, prod3, prod4];
+let cart = [];
 
-let usuarioLogueado = "";
-const datoEmail = document.getElementById("email");
-const datoNombre = document.getElementById("name");
-
-let envio = 500;
+let ship = 475;
 let subtotal = 0;
 let total = 0;
 
-const envioCarritoHtml = document.getElementById("ship-cart");
-const envioDatoHtml = document.getElementById("ship-data");
+const shipCart = document.getElementById("ship-cart");
+const shipInfo = document.getElementById("ship-data");
 const subtotalHtml = document.getElementById("subtotal");
 const totalHtml = document.getElementById("total");
 
-const listaCarrito = document.querySelector(".cart__resume__products");
-const productoCarrito = document.getElementById("template-product").content;
-const fragmento = document.createDocumentFragment();
+////////////////////// Muestra los Productos disponibles
 
-////////////////////// Funcion que inicia el programa
+const listProducts = document.querySelector(".products__list");
+const templateProduct = document.getElementById("product-card").content;
+const fragment = document.createDocumentFragment();
+
+const showProducts = () => {
+  products.forEach((prod) => {
+    if (prod.stock > 0) {
+      templateProduct
+        .querySelector(".product__card")
+        .setAttribute("id", prod.id);
+      templateProduct.querySelector("img").setAttribute("src", prod.img);
+      templateProduct.querySelector(".product__card__title").textContent =
+        prod.nombre;
+      templateProduct.querySelector(
+        ".product__card__price"
+      ).textContent = `$ ${prod.precio}`;
+
+      const clone = templateProduct.cloneNode(true);
+      fragment.appendChild(clone);
+    }
+  });
+  listProducts.appendChild(fragment);
+};
+
+////////////////////// Inicializa el script
 
 const init = () => {
-  let user;
-
-  do {
-    user = prompt(`Bienvenido!\n
-    Si eres Cliente pulsa 1\n
-    Si eres Administrador pulsa 2\n`);
-    if (user != 1 && user != 2) alert("Ingrese una opción correcta");
-  } while (user != 1 && user != 2);
-
-  if (user == 1) {
-    if (sign() == true) {
-      console.log("-----RESUMEN-----");
-      mostrarProductos();
-    } else {
-      alert(
-        "Ha superado el límite de intentos para iniciar sesión. Reintente en unos minutos"
-      );
-    }
-  } else if (user == 2) {
-    alert(
-      "El Administrador de Productos se encuentra en mantenimiento. Disculpe las molestias.-"
-    );
-    // let passwordAdm;
-    // do {
-    //   passwordAdm = prompt(`-Administrador de Productos-\n
-    // Ingrese la contraseña:\n`);
-    //   if (passwordAdm != "1") alert("Contraseña incorrecta");
-    // } while (passwordAdm != "1");
-    // administrarProductos();
+  try {
+    showProducts();
+  } catch (error) {
+    console.log(error);
   }
-};
-
-////////////////////// Login
-
-const sign = () => {
-  let user;
-  let pass;
-
-  do {
-    user = prompt(`Elija su usuario:\n
-     ${usuarios[0].id}) - ${usuarios[0].nombre}\n
-     ${usuarios[1].id}) - ${usuarios[1].nombre}\n
-     NUEVO) - Crear nuevo Usuario\n
-    `).toUpperCase();
-  } while (
-    user === "" ||
-    (user != usuarios[0].id && user != usuarios[1].id && user != "NUEVO")
-  );
-
-  switch (user) {
-    case usuarios[0].id:
-      for (let i = 1; i <= 3; i++) {
-        pass = prompt(`${usuarios[0].nombre} ingresa tu contraseña:`);
-        if (pass != usuarios[0].contraseña && i < 3)
-          alert("Contraseña incorrecta. Intente nuevamente.");
-        else if (pass != usuarios[0].contraseña && i == 3) return false;
-        else {
-          usuarioLogueado = usuarios[0].nombre;
-          datoNombre.value = usuarios[0].nombre;
-          datoEmail.value = usuarios[0].email;
-          return true;
-        }
-      }
-      return false;
-
-    case usuarios[1].id:
-      for (let i = 1; i <= 3; i++) {
-        pass = prompt(`${usuarios[1].nombre} ingresa tu contraseña:`);
-        if (pass != usuarios[1].contraseña && i < 3)
-          alert("Contraseña incorrecta. Intente nuevamente.");
-        else if (pass != usuarios[1].contraseña && i == 3) return false;
-        else {
-          usuarioLogueado = usuarios[1].nombre;
-          datoNombre.value = usuarios[1].nombre;
-          datoEmail.value = usuarios[1].email;
-          return true;
-        }
-      }
-      return false;
-
-    case "NUEVO":
-      let idNuevoUsuario = "";
-      let nombreNuevoUsuario = "";
-      let emailNuevoUsuario = "";
-      let passwNuevoUsuario = "";
-
-      do {
-        idNuevoUsuario = prompt(
-          "Ingrese un identificador/apodo de su Usuario"
-        ).toUpperCase();
-        if (
-          idNuevoUsuario.trim().length < 2 ||
-          idNuevoUsuario.trim().length > 5
-        )
-          alert("Ingrese ente 2 y 5 caracteres");
-        else if (!isNaN(idNuevoUsuario)) alert("Ingrese letras y/o números");
-      } while (
-        idNuevoUsuario.trim().length < 2 ||
-        idNuevoUsuario.trim().length > 5 ||
-        !isNaN(idNuevoUsuario)
-      );
-
-      do {
-        nombreNuevoUsuario = prompt("Ingrese su Nombre completo:");
-        if (
-          nombreNuevoUsuario.trim().length < 2 ||
-          nombreNuevoUsuario.trim().length > 50
-        )
-          alert("Ingrese ente 2 y 50 letras");
-        else if (!isNaN(nombreNuevoUsuario)) alert("Ingrese sólo letras");
-      } while (
-        nombreNuevoUsuario.trim().length < 2 ||
-        nombreNuevoUsuario.trim().length > 50 ||
-        !isNaN(nombreNuevoUsuario)
-      );
-
-      do {
-        emailNuevoUsuario = prompt("Email:");
-        if (!emailNuevoUsuario.includes("@")) alert("Ingrese un email válido");
-      } while (!emailNuevoUsuario.includes("@"));
-
-      do {
-        passwNuevoUsuario = prompt("Contraseña:");
-        if (passwNuevoUsuario.trim().length < 3)
-          alert("ingrese como mínimo 3 caracteres");
-      } while (passwNuevoUsuario.trim().length < 3);
-
-      const nuevoUsuario = new Usuario(
-        idNuevoUsuario,
-        nombreNuevoUsuario,
-        emailNuevoUsuario,
-        passwNuevoUsuario
-      );
-      usuarios.push(nuevoUsuario);
-      console.log(
-        `Bienvenido: ${usuarios[usuarios.length - 1].id} - ${
-          usuarios[usuarios.length - 1].nombre
-        }`
-      );
-      usuarioLogueado = usuarios[usuarios.length - 1].nombre;
-      datoNombre.value = usuarios[usuarios.length - 1].nombre;
-      datoEmail.value = usuarios[usuarios.length - 1].email;
-      return true;
-  }
-};
-
-////////////////////// Muestra los productos disponibles al usuario (mediante Prompt)
-
-const mostrarProductos = () => {
-  let idProd;
-  let agregaProd = true;
-
-  do {
-    idProd = prompt(`Hola ${usuarioLogueado} ¿qué producto deseas llevar?\n
-            A) ${productos[0].nombre} - Talle ${productos[0].talle} - $ ${productos[0].precio} - Stock: ${productos[0].stock}\n
-            B) ${productos[1].nombre} - Talle ${productos[1].talle} - $ ${productos[1].precio} - Stock: ${productos[1].stock}\n
-            C) ${productos[2].nombre} - Talle ${productos[2].talle} - $ ${productos[2].precio} - Stock: ${productos[2].stock}\n
-            D) ${productos[3].nombre} - Talle ${productos[3].talle} - $ ${productos[3].precio} - Stock: ${productos[3].stock}\n
-            `);
-
-    if (idProd == null) {
-      alert("Elija un producto por favor");
-    } else {
-      idProd = idProd.toUpperCase().trim();
-      if (
-        idProd === "" ||
-        (idProd != "A" && idProd != "B" && idProd != "C" && idProd != "D")
-      )
-        alert("Ingrese una opción correcta");
-    }
-  } while (
-    idProd === "" ||
-    (idProd != "A" && idProd != "B" && idProd != "C" && idProd != "D")
-  );
-
-  if (idProd == "A" && productos[0].stock > 0) {
-    carrito.push(productos[0]);
-    productos[0].stock -= 1;
-  } else if (idProd == "B" && productos[1].stock > 0) {
-    carrito.push(productos[1]);
-    productos[1].stock -= 1;
-  } else if (idProd == "C" && productos[2].stock > 0) {
-    carrito.push(productos[2]);
-    productos[2].stock -= 1;
-  } else if (idProd == "D" && productos[3].stock > 0) {
-    carrito.push(productos[3]);
-    productos[3].stock -= 1;
-  } else {
-    alert("No tenemos stock del producto seleccionado. Disculpe.-");
-    agregaProd = false;
-  }
-
-  if (agregaProd == true) {
-    console.log(`Producto: ${carrito[carrito.length - 1].nombre}`);
-    console.log(`Precio: ${carrito[carrito.length - 1].precio}`);
-
-    subtotal += carrito[carrito.length - 1].precio;
-
-    alert(
-      `Usted eligió ${carrito[carrito.length - 1].nombre}, el mismo cuesta $ ${
-        carrito[carrito.length - 1].precio
-      }\n
-      SUBTOTAL: $ ${subtotal}`
-    );
-
-    console.log(`SUBTOTAL: ${subtotal}`);
-  }
-
-  preguntarContinuar();
-};
-
-////////////////////// Pregunta si desea seguir comprando
-
-const preguntarContinuar = () => {
-  let seguirComprando = confirm("¿Desea seguir comprando?");
-  seguirComprando ? mostrarProductos() : informarCompra();
-};
-
-////////////////////// Itera el carrito en HTML
-
-const informarCompra = () => {
-  alert(
-    `¡Gracias ${usuarioLogueado} por elegirnos! A continuación, se procederá a mostrar el Resumen de sus productos. Por favor, rellene toda la información requerida para seguir con la compra.\n`
-  );
-
-  carrito.forEach((prod) => {
-    productoCarrito.querySelector(".cart__product #product__name").textContent =
-      prod.nombre;
-    productoCarrito.querySelector(
-      ".cart__product p"
-    ).textContent = `${prod.color}, ${prod.talle}`;
-    productoCarrito.querySelector(
-      ".cart__product #price"
-    ).textContent = `$ ${prod.precio}`;
-
-    const clone = productoCarrito.cloneNode(true);
-    fragmento.appendChild(clone);
-  });
-  listaCarrito.appendChild(fragmento);
-
-  total = subtotal + envio;
-
-  console.log(`Costo de Envío: ${envio}`);
-  console.log(`TOTAL: ${total}`);
-  envioDatoHtml.textContent = `$ ${envio}`;
-  envioCarritoHtml.textContent = `$ ${envio}`;
-  subtotalHtml.textContent = `$ ${subtotal}`;
-  totalHtml.textContent = `$ ${total}`;
 };
 
 init();
+
+////////////////////// Logica del boton de añadir al carrito (las variables las declaro ahora porque los btnCart no existen antes de mostrar los productos)
+
+const listCart = document.querySelector(".cart__resume__products");
+const templateProductCart = document.getElementById("product-cart").content;
+const btnCart = document.querySelectorAll(".btn-cart");
+
+const getProductOnClick = (event) => {
+  const button = event.target;
+  const prod = button.closest(".product__card");
+
+  const prodId = prod.id;
+  const alertOK = prod.querySelector("#alertOK");
+  addProductToCart(prodId, alertOK);
+
+  shipInfo.textContent = `$ ${ship}`;
+  shipCart.textContent = `$ ${ship}`;
+};
+
+const addProductToCart = (prodId, alertOK) => {
+  const prod = products.find((p) => p.id === prodId);
+
+  if (prod.stock > 0) {
+    if (cart.includes(prod)) {
+      listCart.querySelectorAll(".cart__product").forEach((item) => {
+        if (prod.id === item.getAttribute("id")) {
+          prod.stock -= 1;
+          prod.cantidad += 1;
+          console.log(cart[cart.length - 1]);
+
+          item
+            .querySelector(".cart__product .input-quantity")
+            .setAttribute("value", prod.cantidad);
+          item.querySelector(".cart__product #price").textContent = `$ ${
+            prod.precio * prod.cantidad
+          }`;
+        }
+      });
+    } else {
+      prod.stock -= 1;
+      prod.cantidad += 1;
+      cart.push(prod);
+      console.log(cart[cart.length - 1]);
+
+      templateProductCart.querySelector(".cart__product").id = prod.id;
+
+      templateProductCart.querySelector("img").src = prod.img;
+
+      templateProductCart.querySelector(
+        ".cart__product #product__name"
+      ).textContent = prod.nombre;
+
+      templateProductCart.querySelector(
+        ".cart__product #details"
+      ).textContent = `${prod.color}, ${prod.talle}`;
+
+      templateProductCart
+        .querySelector(".cart__product .input-quantity")
+        .setAttribute("value", prod.cantidad);
+      templateProductCart
+        .querySelector(".cart__product .input-quantity")
+        .setAttribute("max", prod.stock + 1);
+
+      templateProductCart.querySelector(
+        ".cart__product #price"
+      ).textContent = `$ ${prod.precio * prod.cantidad}`;
+
+      const clone = templateProductCart.cloneNode(true);
+      fragment.appendChild(clone);
+
+      listCart.appendChild(fragment);
+    }
+
+    showAlertOK(alertOK);
+
+    subtotal += cart[cart.length - 1].precio;
+    total = subtotal + ship;
+
+    subtotalHtml.textContent = `$ ${subtotal}`;
+    totalHtml.textContent = `$ ${total}`;
+  } else {
+    alert(`No tenemos más stock del producto por el momento, disculpe.-`);
+  }
+};
+
+const showAlertOK = (alertOK) => {
+  alertOK.classList.add("active");
+  if (alertOK.classList.contains("active")) {
+    setTimeout(() => {
+      alertOK.classList.remove("active");
+    }, 500);
+  }
+};
+
+btnCart.forEach((btn) => {
+  btn.addEventListener("click", getProductOnClick);
+});
