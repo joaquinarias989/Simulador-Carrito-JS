@@ -223,11 +223,7 @@ const addProductToCart = (prodId, alertOK) => {
 
     showAlertOK(alertOK);
 
-    subtotal += cart[cart.length - 1].precio;
-    total = subtotal + ship;
-
-    subtotalHtml.textContent = `$ ${subtotal}`;
-    totalHtml.textContent = `$ ${total}`;
+    updateTotal();
   } else {
     alert(`No tenemos más stock del producto por el momento, disculpe.-`);
   }
@@ -273,7 +269,7 @@ const updateInputQuantity = (prodId) => {
       reduceOne.addEventListener("click", () => {
         if (prod.cantidad > 1) {
           prod.stock += 1;
-          prod.cantidad = 0;
+          prod.cantidad -= 1;
           item.querySelector(".cart__product .input-quantity").textContent =
             prod.cantidad;
           item.querySelector(".cart__product #price").textContent = `$ ${
@@ -281,21 +277,28 @@ const updateInputQuantity = (prodId) => {
           }`;
         } else if (prod.cantidad == 1) {
           prod.stock += 1;
-          prod.cantidad -= 1;
+          prod.cantidad = 0;
           cart.splice(
             cart.find((c) => c === prod),
             1
           );
           item.remove();
         }
-        cart.length > 0 ? (subtotal -= prod.precio) : (subtotal = 0);
-
-        total = subtotal + ship;
-        subtotalHtml.textContent = `$ ${subtotal}`;
-        totalHtml.textContent = `$ ${total}`;
+        updateTotal();
       });
     }
   });
+};
+
+const updateTotal = () => {
+  subtotal = cart.reduce(
+    (acc, { cantidad, precio }) => acc + cantidad * precio,
+    0
+  );
+  total = subtotal + ship;
+
+  subtotalHtml.textContent = `$ ${subtotal}`;
+  totalHtml.textContent = `$ ${total}`;
 };
 
 btnCart.forEach((btn) => {
