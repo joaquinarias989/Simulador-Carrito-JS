@@ -141,6 +141,8 @@ const showProducts = () => {
 const init = () => {
   try {
     showProducts();
+    shipInfo.textContent = `$ ${ship}`;
+    shipCart.textContent = `$ ${ship}`;
   } catch (error) {
     console.log(error);
   }
@@ -160,10 +162,16 @@ const getProductOnClick = (event) => {
 
   const prodId = prod.id;
   const alertOK = prod.querySelector("#alertOK");
+
   addProductToCart(prodId, alertOK);
 
-  shipInfo.textContent = `$ ${ship}`;
-  shipCart.textContent = `$ ${ship}`;
+  const prodSelected = products.find((p) => p.id === prodId);
+  if (prodSelected.cantidad == 1) {
+    updateInputQuantity(prodId);
+  }
+  // if(prodSelected.stock == 0){
+  //   prod.remove()
+  // }
 };
 
 const addProductToCart = (prodId, alertOK) => {
@@ -177,18 +185,17 @@ const addProductToCart = (prodId, alertOK) => {
           prod.cantidad += 1;
           console.log(cart[cart.length - 1]);
 
-          item
-            .querySelector(".cart__product .input-quantity")
-            .setAttribute("value", prod.cantidad);
+          item.querySelector(".cart__product .input-quantity").textContent =
+            prod.cantidad;
           item.querySelector(".cart__product #price").textContent = `$ ${
             prod.precio * prod.cantidad
           }`;
         }
       });
     } else {
+      cart.push(prod);
       prod.stock -= 1;
       prod.cantidad += 1;
-      cart.push(prod);
       console.log(cart[cart.length - 1]);
 
       templateProductCart.querySelector(".cart__product").id = prod.id;
@@ -203,12 +210,9 @@ const addProductToCart = (prodId, alertOK) => {
         ".cart__product #details"
       ).textContent = `${prod.color}, ${prod.talle}`;
 
-      templateProductCart
-        .querySelector(".cart__product .input-quantity")
-        .setAttribute("value", prod.cantidad);
-      templateProductCart
-        .querySelector(".cart__product .input-quantity")
-        .setAttribute("max", prod.stock + 1);
+      templateProductCart.querySelector(
+        ".cart__product .input-quantity"
+      ).textContent = prod.cantidad;
 
       templateProductCart.querySelector(
         ".cart__product #price"
@@ -239,6 +243,68 @@ const showAlertOK = (alertOK) => {
       alertOK.classList.remove("active");
     }, 500);
   }
+};
+
+const updateInputQuantity = (prodId) => {
+  const prod = products.find((p) => p.id === prodId);
+
+  listCart.querySelectorAll(".cart__product").forEach((item) => {
+    if (prod.id === item.getAttribute("id")) {
+      let addOne = item.querySelector(".cart__product #addOne");
+      let reduceOne = item.querySelector(".cart__product #reduceOne");
+
+      addOne.addEventListener("click", () => {
+        if (prod.stock > 0) {
+          prod.stock -= 1;
+          prod.cantidad += 1;
+          item.querySelector(".cart__product .input-quantity").textContent =
+            prod.cantidad;
+          item.querySelector(".cart__product #price").textContent = `$ ${
+            prod.precio * prod.cantidad
+          }`;
+
+          subtotal += cart[cart.length - 1].precio;
+          total = subtotal + ship;
+
+          subtotalHtml.textContent = `$ ${subtotal}`;
+          totalHtml.textContent = `$ ${total}`;
+        } else {
+          alert(`No tenemos más stock del producto por el momento, disculpe.-`);
+        }
+      });
+
+      reduceOne.addEventListener("click", () => {
+        if (prod.cantidad > 1) {
+          prod.stock += 1;
+          prod.cantidad -= 1;
+          item.querySelector(".cart__product .input-quantity").textContent =
+            prod.cantidad;
+          item.querySelector(".cart__product #price").textContent = `$ ${
+            prod.precio * prod.cantidad
+          }`;
+          subtotal -= prod.precio;
+          total = subtotal + ship;
+        } else if (prod.cantidad == 1) {
+          prod.stock += 1;
+          prod.cantidad -= 1;
+          cart.splice(
+            cart.find((c) => c === prod),
+            1
+          );
+          item.remove();
+          subtotal -= prod.precio;
+          total = subtotal + ship;
+        }
+        //   cart.length > 0
+        //   ? (subtotal -= cart[cart.length - 1].precio)
+        //   : (subtotal = 0);
+
+        // total = subtotal + ship;
+        subtotalHtml.textContent = `$ ${subtotal}`;
+        totalHtml.textContent = `$ ${total}`;
+      });
+    }
+  });
 };
 
 btnCart.forEach((btn) => {
