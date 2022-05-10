@@ -273,7 +273,7 @@ const updateInputQuantity = (prodId) => {
       reduceOne.addEventListener("click", () => {
         if (prod.cantidad > 1) {
           prod.stock += 1;
-          prod.cantidad -= 1;
+          prod.cantidad = 0;
           item.querySelector(".cart__product .input-quantity").textContent =
             prod.cantidad;
           item.querySelector(".cart__product #price").textContent = `$ ${
@@ -288,9 +288,7 @@ const updateInputQuantity = (prodId) => {
           );
           item.remove();
         }
-        cart.length > 0
-          ? (subtotal -= cart[cart.length - 1].precio)
-          : (subtotal = 0);
+        cart.length > 0 ? (subtotal -= prod.precio) : (subtotal = 0);
 
         total = subtotal + ship;
         subtotalHtml.textContent = `$ ${subtotal}`;
