@@ -296,6 +296,24 @@ main {
 .btn-secundario:hover {
   background: #ffda07;
 }
+.btn-remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background: #b51919;
+  color: #fff;
+  border-radius: 0;
+  padding: 0.8rem 2rem;
+  font-size: 1.8em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  display: none;
+}
+.btn-remove:hover {
+  background: rgba(181, 25, 25, 0.62);
+}
 
 /*     FORMS    */
 .form__paper {
@@ -1365,6 +1383,10 @@ main.bg-bricks {
 }
 .cart__resume__products .cart__product .input-quantity {
   text-align: center;
+}
+.cart__resume__products .cart__product .btn-group button {
+  font-size: inherit;
+  padding: 0 1rem;
 }
 .cart__resume .cart__subtotal {
   padding: 2rem;

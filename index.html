@@ -378,14 +378,20 @@
                     <img src="./assets/img/img-ejemplo.png" />
                   </div>
                   <div class="cart__product__info">
-                    <h3 class="text-underlined" id="product__name"></h3>
+                    <h3
+                      class="cart__product__title text-underlined"
+                      id="product__name"
+                    ></h3>
                     <p id="details"></p>
                     <div class="d-flex jc-between gap-3 pe-3">
                       <p>Cantidad: <span class="input-quantity"></span></p>
-                      <div>
-                        <button id="addOne" class="btn-primary px-3">+</button>
-                        <button id="reduceOne" class="btn-secondary px-3">
+                      <div class="d-flex btn-group">
+                        <button id="addOne" class="btn-principal">+</button>
+                        <button id="reduceOne" class="btn btn-secondary">
                           -
+                        </button>
+                        <button id="removeProd" class="btn btn-remove">
+                          x
                         </button>
                       </div>
                     </div>
