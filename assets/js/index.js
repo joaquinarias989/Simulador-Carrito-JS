@@ -102,8 +102,6 @@ let products = [prod1, prod2, prod3, prod4];
 let cart = [];
 
 let ship = 475;
-let subtotal = 0;
-let total = 0;
 
 const shipCart = document.getElementById("ship-cart");
 const shipInfo = document.getElementById("ship-data");
@@ -134,6 +132,7 @@ const showProducts = () => {
       ).textContent = `$ ${prod.precio}`;
 
       const clone = templateProduct.cloneNode(true);
+
       fragment.appendChild(clone);
     }
   });
@@ -178,12 +177,18 @@ const addProductToCart = (prod, alertOK) => {
   prod.cantidad += 1;
 
   if (cart.includes(prod)) {
-    const elementsId = listCart.getElementsByClassName("cart__product");
+    const elements = listCart.getElementsByClassName("cart__product");
 
-    for (let i = 0; i < elementsId.length; i++) {
-      if (elementsId[i].id === prod.id) {
-        let elementQuantity = elementsId[i].querySelector(".input-quantity");
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].id === prod.id) {
+        let elementQuantity = elements[i].querySelector(".input-quantity");
         elementQuantity.textContent = prod.cantidad;
+        elements[i]
+          .querySelector(".cart__product #reduceOne")
+          .classList.remove("d-none");
+        elements[i]
+          .querySelector(".cart__product #removeProd")
+          .classList.add("d-none");
 
         updateTotal();
         return;
@@ -222,6 +227,10 @@ const addProductToCart = (prod, alertOK) => {
       .querySelector(".cart__product #reduceOne")
       .addEventListener("click", () => decreaseQuantity(prod));
 
+    clone
+      .querySelector(".cart__product #removeProd")
+      .addEventListener("click", () => decreaseQuantity(prod));
+
     fragment.appendChild(clone);
 
     listCart.appendChild(fragment);
@@ -237,15 +246,21 @@ const increaseQuantity = (prod) => {
     alert(`No tenemos más stock del producto por el momento, disculpe.-`);
     return;
   }
-  const elementsId = listCart.getElementsByClassName("cart__product");
+  const elements = listCart.getElementsByClassName("cart__product");
 
-  for (let i = 0; i < elementsId.length; i++) {
-    if (elementsId[i].id === prod.id) {
+  for (let i = 0; i < elements.length; i++) {
+    if (elements[i].id === prod.id) {
       prod.stock -= 1;
       prod.cantidad += 1;
 
-      let elementQuantity = elementsId[i].querySelector(".input-quantity");
+      let elementQuantity = elements[i].querySelector(".input-quantity");
       elementQuantity.textContent = prod.cantidad;
+      elements[i]
+        .querySelector(".cart__product #reduceOne")
+        .classList.remove("d-none");
+      elements[i]
+        .querySelector(".cart__product #removeProd")
+        .classList.add("d-none");
     }
   }
 
@@ -257,9 +272,21 @@ const decreaseQuantity = (prod) => {
 
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].id === prod.id) {
-      if (prod.cantidad > 1) {
+      if (prod.cantidad > 2) {
         prod.stock += 1;
         prod.cantidad -= 1;
+        let elementQuantity = elements[i].querySelector(".input-quantity");
+        elementQuantity.textContent = prod.cantidad;
+      } else if (prod.cantidad == 2) {
+        prod.stock += 1;
+        prod.cantidad -= 1;
+        elements[i]
+          .querySelector(".cart__product #reduceOne")
+          .classList.add("d-none");
+        elements[i]
+          .querySelector(".cart__product #removeProd")
+          .classList.remove("d-none");
+
         let elementQuantity = elements[i].querySelector(".input-quantity");
         elementQuantity.textContent = prod.cantidad;
       } else if (prod.cantidad == 1) {
@@ -284,12 +311,13 @@ const decreaseQuantity = (prod) => {
 };
 
 const updateTotal = () => {
+  let subtotal = 0;
+  let total = 0;
   subtotal = cart.reduce(
     (acc, { cantidad, precio }) => acc + cantidad * precio,
     0
   );
   total = subtotal + ship;
-
   subtotalHtml.textContent = `$ ${subtotal}`;
   totalHtml.textContent = `$ ${total}`;
 };

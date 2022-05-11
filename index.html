@@ -383,15 +383,17 @@
                       id="product__name"
                     ></h3>
                     <p id="details"></p>
-                    <div class="d-flex jc-between gap-3 pe-3">
+                    <div class="d-flex algn-items-center jc-between gap-3 pe-3">
                       <p>Cantidad: <span class="input-quantity"></span></p>
-                      <div class="d-flex btn-group">
-                        <button id="addOne" class="btn-principal">+</button>
-                        <button id="reduceOne" class="btn btn-secondary">
-                          -
+                      <div class="d-flex algn-items-center btn-group">
+                        <button id="addOne" class="btn-principal">
+                          <i class="fa fa-plus"></i>
                         </button>
-                        <button id="removeProd" class="btn btn-remove">
-                          x
+                        <button id="reduceOne" class="btn-secundario d-none">
+                          <i class="fa fa-minus"></i>
+                        </button>
+                        <button id="removeProd" class="btn-remove">
+                          <i class="fa fa-trash"></i>
                         </button>
                       </div>
                     </div>
