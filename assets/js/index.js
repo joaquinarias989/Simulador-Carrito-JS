@@ -154,6 +154,8 @@ init();
 ////////////////////// Logica del boton de añadir al carrito
 
 const btnCart = document.querySelectorAll(".btn-cart");
+const showQuantity = document.querySelector(".cart-quantity");
+
 btnCart.forEach((btn) => {
   btn.addEventListener("click", getProductOnClick);
 });
@@ -317,9 +319,13 @@ const updateTotal = () => {
     (acc, { cantidad, precio }) => acc + cantidad * precio,
     0
   );
+
   total = subtotal + ship;
   subtotalHtml.textContent = `$ ${subtotal}`;
   totalHtml.textContent = `$ ${total}`;
+
+  let totalQuantity = cart.reduce((acc, { cantidad }) => acc + cantidad, 0);
+  showQuantity.textContent = totalQuantity;
 };
 
 const showAlertOK = (alertOK) => {
