@@ -133,6 +133,11 @@ const showProducts = () => {
 
       const clone = templateProduct.cloneNode(true);
 
+      const alertOK = clone.querySelector("#alertOK");
+      clone
+        .querySelector(".btn-cart")
+        .addEventListener("click", () => addProductToCart(prod, alertOK));
+
       fragment.appendChild(clone);
     }
   });
@@ -143,7 +148,17 @@ const showProducts = () => {
 
 const init = () => {
   try {
-    showProducts();
+    document.addEventListener("DOMContentLoaded", (e) => {
+      showProducts();
+
+      if (localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"));
+        showCart();
+      }
+    });
+
+    shipInfo.textContent = `$ ${ship}`;
+    shipCart.textContent = `$ ${ship}`;
   } catch (error) {
     console.log(error);
   }
@@ -151,32 +166,67 @@ const init = () => {
 
 init();
 
-////////////////////// Logica del boton de añadir al carrito
+const showCart = () => {
+  listCart.innerHTML = "";
+  cart.forEach((prod) => {
+    templateProductCart.querySelector(".cart__product").id = prod.id;
 
-const btnCart = document.querySelectorAll(".btn-cart");
-const showQuantity = document.querySelector(".cart-quantity");
+    templateProductCart.querySelector("img").src = prod.img;
 
-btnCart.forEach((btn) => {
-  btn.addEventListener("click", getProductOnClick);
-});
+    templateProductCart.querySelector(
+      ".cart__product #product__name"
+    ).textContent = prod.nombre;
 
-function getProductOnClick(event) {
-  const button = event.target;
-  const itemProd = button.closest(".product__card");
+    templateProductCart.querySelector(
+      ".cart__product #details"
+    ).textContent = `${prod.color}, ${prod.talle}`;
 
-  const alertOK = itemProd.querySelector("#alertOK");
-  const prod = products.find((p) => p.id === itemProd.id);
+    templateProductCart.querySelector(
+      ".cart__product .input-quantity"
+    ).textContent = prod.cantidad;
 
-  addProductToCart(prod, alertOK);
-}
+    templateProductCart.querySelector(
+      ".cart__product #price"
+    ).textContent = `$ ${prod.precio * prod.cantidad}`;
+
+    const clone = templateProductCart.cloneNode(true);
+
+    clone
+      .querySelector(".cart__product #addOne")
+      .addEventListener("click", () => increaseQuantity(prod));
+
+    clone
+      .querySelector(".cart__product #reduceOne")
+      .addEventListener("click", () => decreaseQuantity(prod));
+
+    clone
+      .querySelector(".cart__product #removeProd")
+      .addEventListener("click", () => decreaseQuantity(prod));
+
+    if (prod.cantidad > 1) {
+      clone
+        .querySelector(".cart__product #reduceOne")
+        .classList.toggle("d-none");
+      clone
+        .querySelector(".cart__product #removeProd")
+        .classList.toggle("d-none");
+    }
+
+    fragment.appendChild(clone);
+  });
+  listCart.appendChild(fragment);
+  updateTotal();
+};
 
 const addProductToCart = (prod, alertOK) => {
   if (prod.stock <= 0) {
     alert(`No tenemos más stock del producto por el momento, disculpe.-`);
     return;
   }
+
   prod.stock -= 1;
   prod.cantidad += 1;
+  showAlertOK(alertOK);
 
   if (cart.includes(prod)) {
     const elements = listCart.getElementsByClassName("cart__product");
@@ -238,8 +288,6 @@ const addProductToCart = (prod, alertOK) => {
     listCart.appendChild(fragment);
   }
 
-  showAlertOK(alertOK);
-
   updateTotal();
 };
 
@@ -275,13 +323,13 @@ const decreaseQuantity = (prod) => {
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].id === prod.id) {
       if (prod.cantidad > 2) {
-        prod.stock += 1;
-        prod.cantidad -= 1;
+        prod.stock++;
+        prod.cantidad--;
         let elementQuantity = elements[i].querySelector(".input-quantity");
         elementQuantity.textContent = prod.cantidad;
       } else if (prod.cantidad == 2) {
-        prod.stock += 1;
-        prod.cantidad -= 1;
+        prod.stock++;
+        prod.cantidad--;
         elements[i]
           .querySelector(".cart__product #reduceOne")
           .classList.add("d-none");
@@ -292,7 +340,7 @@ const decreaseQuantity = (prod) => {
         let elementQuantity = elements[i].querySelector(".input-quantity");
         elementQuantity.textContent = prod.cantidad;
       } else if (prod.cantidad == 1) {
-        prod.stock += 1;
+        prod.stock++;
         prod.cantidad = 0;
         for (let c = 0; c < cart.length; c++) {
           if (cart[c] === prod) {
@@ -315,17 +363,23 @@ const decreaseQuantity = (prod) => {
 const updateTotal = () => {
   let subtotal = 0;
   let total = 0;
+  let totalQuantity = 0;
+  let showQuantity = document.querySelector(".cart-quantity");
+
   subtotal = cart.reduce(
     (acc, { cantidad, precio }) => acc + cantidad * precio,
     0
   );
+  totalQuantity = cart.reduce((acc, { cantidad }) => acc + cantidad, 0);
 
   total = subtotal + ship;
   subtotalHtml.textContent = `$ ${subtotal}`;
   totalHtml.textContent = `$ ${total}`;
+  totalQuantity == 0
+    ? (showQuantity.textContent = "")
+    : (showQuantity.textContent = totalQuantity);
 
-  let totalQuantity = cart.reduce((acc, { cantidad }) => acc + cantidad, 0);
-  showQuantity.textContent = totalQuantity;
+  localStorage.setItem("cart", JSON.stringify(cart));
 };
 
 const showAlertOK = (alertOK) => {
