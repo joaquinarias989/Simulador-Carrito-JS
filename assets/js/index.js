@@ -234,6 +234,7 @@ const addProductToCart = (prod, alertOK) => {
   prod.stock -= 1;
   prod.cantidad += 1;
   showAlertOK(alertOK);
+
   if (cart.some((p) => p.id == prod.id)) {
     let indice = cart.findIndex((index) => index.id == prod.id);
     cart[indice].cantidad = prod.cantidad;
@@ -298,6 +299,7 @@ const addProductToCart = (prod, alertOK) => {
     listCart.appendChild(fragment);
   }
 
+  showProducts();
   updateTotal();
 };
 
@@ -307,7 +309,6 @@ const increaseQuantity = (prod) => {
       "No tenemos más stock del producto por el momento, disculpe"
     );
     showProducts();
-
     return;
   }
   prod.stock--;
@@ -330,6 +331,7 @@ const increaseQuantity = (prod) => {
     }
   }
 
+  showProducts();
   updateTotal();
 };
 
@@ -364,7 +366,6 @@ const decreaseQuantity = (prod) => {
           }
         }
         elements[i].remove();
-        showProducts();
       }
     }
   }
@@ -373,6 +374,7 @@ const decreaseQuantity = (prod) => {
   products[products.findIndex((p) => p.id == prod.id)].stock = prod.stock;
 
   updateTotal();
+  showProducts();
   return;
 };
 
