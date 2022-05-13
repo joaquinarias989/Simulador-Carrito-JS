@@ -224,7 +224,9 @@ const updateCart = () => {
 
 const addProductToCart = (prod, alertOK) => {
   if (prod.stock <= 0) {
-    alert(`No tenemos más stock del producto por el momento, disculpe.-`);
+    showModalAlert(
+      "No tenemos más stock del producto por el momento, disculpe"
+    );
     return;
   }
 
@@ -300,7 +302,9 @@ const addProductToCart = (prod, alertOK) => {
 
 const increaseQuantity = (prod) => {
   if (prod.stock <= 0) {
-    alert(`No tenemos más stock del producto por el momento, disculpe.-`);
+    showModalAlert(
+      "No tenemos más stock del producto por el momento, disculpe"
+    );
     return;
   }
   prod.stock--;
@@ -401,4 +405,16 @@ const showAlertOK = (alertOK) => {
       alertOK.classList.remove("active");
     }, 500);
   }
+};
+
+// Modal
+const modal = document.getElementById("modal-alert");
+const modalBtnClose = modal.querySelector(".btn-principal");
+
+modalBtnClose.onclick = () => {
+  modal.close();
+};
+const showModalAlert = (text) => {
+  modal.querySelector("h3").textContent = text;
+  modal.showModal();
 };

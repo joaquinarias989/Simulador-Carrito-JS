@@ -1557,3 +1557,40 @@ main.bg-bricks {
     transform: translateY(-0.15em) translateX(-0.01em);
   }
 }
+
+.modal-alert {
+  max-width: 50rem;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: #fff;
+  padding: 3rem;
+  clip-path: polygon(
+    50% 0,
+    99% 0,
+    100% 17%,
+    99% 56%,
+    100% 97%,
+    93% 100%,
+    1% 100%,
+    0 59%,
+    0 25%,
+    0 1%
+  );
+  box-shadow: 10px 10px 10px red;
+  text-align: center;
+}
+.modal-alert[open] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.modal-alert::backdrop {
+  background-color: #00000095;
+}
+.modal-alert i {
+  font-size: 4em;
+  color: #ffda07;
+}
