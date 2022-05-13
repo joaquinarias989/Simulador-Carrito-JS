@@ -191,7 +191,7 @@ const updateCart = () => {
 
     templateProductCart.querySelector(
       ".cart__product #price"
-    ).textContent = `$ ${prod.precio * prod.cantidad}`;
+    ).textContent = `$ ${prod.precio}`;
 
     const clone = templateProductCart.cloneNode(true);
 

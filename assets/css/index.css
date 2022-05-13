@@ -1398,6 +1398,9 @@ main.bg-bricks {
 }
 .cart__resume__products .cart__product .input-quantity {
   text-align: center;
+  position: relative;
+  padding: 0 0.3rem;
+  font-weight: bold;
 }
 .cart__resume__products .cart__product .btn-group button {
   font-size: inherit;
