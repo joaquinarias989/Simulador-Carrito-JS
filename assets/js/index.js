@@ -119,6 +119,7 @@ const fragment = document.createDocumentFragment();
 ////////////////////// Muestra los Productos disponibles
 
 const showProducts = () => {
+  listProducts.innerHTML = "";
   products.forEach((prod) => {
     if (prod.stock > 0) {
       templateProduct
@@ -149,11 +150,10 @@ const showProducts = () => {
 const init = () => {
   try {
     document.addEventListener("DOMContentLoaded", (e) => {
-      showProducts();
-
       if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
         updateCart();
+        showProducts();
       }
     });
 
@@ -227,6 +227,7 @@ const addProductToCart = (prod, alertOK) => {
     showModalAlert(
       "No tenemos más stock del producto por el momento, disculpe"
     );
+    showProducts();
     return;
   }
 
@@ -305,6 +306,8 @@ const increaseQuantity = (prod) => {
     showModalAlert(
       "No tenemos más stock del producto por el momento, disculpe"
     );
+    showProducts();
+
     return;
   }
   prod.stock--;
@@ -361,10 +364,7 @@ const decreaseQuantity = (prod) => {
           }
         }
         elements[i].remove();
-
-        // elements[i].querySelector(".btn-secondary").classList.toggle("d-none");
-        // elements[i].querySelector(".btn-remove").classList.toggle("d-flex");
-        // prod.cantidad = 1;
+        showProducts();
       }
     }
   }
