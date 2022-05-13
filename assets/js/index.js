@@ -99,7 +99,7 @@ const usuario2 = new Usuario(
 
 let users = [usuario1, usuario2];
 let products = [prod1, prod2, prod3, prod4];
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) ?? [];
 
 let ship = 475;
 
@@ -153,7 +153,7 @@ const init = () => {
 
       if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
-        showCart();
+        updateCart();
       }
     });
 
@@ -166,9 +166,13 @@ const init = () => {
 
 init();
 
-const showCart = () => {
+const updateCart = () => {
   listCart.innerHTML = "";
   cart.forEach((prod) => {
+    //actualiza la cantidad y el stock de cada producto según quedó guardo en el carrito
+    products.find((p) => p.id == prod.id).cantidad = prod.cantidad;
+    products.find((p) => p.id == prod.id).stock = prod.stock;
+
     templateProductCart.querySelector(".cart__product").id = prod.id;
 
     templateProductCart.querySelector("img").src = prod.img;
@@ -227,8 +231,11 @@ const addProductToCart = (prod, alertOK) => {
   prod.stock -= 1;
   prod.cantidad += 1;
   showAlertOK(alertOK);
+  if (cart.some((p) => p.id == prod.id)) {
+    let indice = cart.findIndex((index) => index.id == prod.id);
+    cart[indice].cantidad = prod.cantidad;
+    cart[indice].stock = prod.stock;
 
-  if (cart.includes(prod)) {
     const elements = listCart.getElementsByClassName("cart__product");
 
     for (let i = 0; i < elements.length; i++) {
@@ -296,13 +303,15 @@ const increaseQuantity = (prod) => {
     alert(`No tenemos más stock del producto por el momento, disculpe.-`);
     return;
   }
-  const elements = listCart.getElementsByClassName("cart__product");
+  prod.stock--;
+  prod.cantidad++;
 
+  products[products.findIndex((p) => p.id == prod.id)].cantidad = prod.cantidad;
+  products[products.findIndex((p) => p.id == prod.id)].stock = prod.stock;
+
+  const elements = listCart.getElementsByClassName("cart__product");
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].id === prod.id) {
-      prod.stock -= 1;
-      prod.cantidad += 1;
-
       let elementQuantity = elements[i].querySelector(".input-quantity");
       elementQuantity.textContent = prod.cantidad;
       elements[i]
@@ -355,6 +364,9 @@ const decreaseQuantity = (prod) => {
       }
     }
   }
+
+  products[products.findIndex((p) => p.id == prod.id)].cantidad = prod.cantidad;
+  products[products.findIndex((p) => p.id == prod.id)].stock = prod.stock;
 
   updateTotal();
   return;
