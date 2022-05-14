@@ -442,7 +442,7 @@ formPurchase.addEventListener("submit", (e) => {
   // for (let [name, value] of formData) {
   //   console.log(`${name} = ${value}`);
   // }
-  // localStorage.setItem("purchase", JSON.stringify(Array.from(formData)));
+  localStorage.setItem("purchase", JSON.stringify(Array.from(formData)));
   localStorage.removeItem("cart");
   cart = [];
   formPurchase.reset();
