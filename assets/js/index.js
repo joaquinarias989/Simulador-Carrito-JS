@@ -153,8 +153,8 @@ const init = () => {
       if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
         updateCart();
-        showProducts();
       }
+      showProducts();
     });
 
     shipInfo.textContent = `$ ${ship}`;
@@ -225,6 +225,7 @@ const updateCart = () => {
 const addProductToCart = (prod, alertOK) => {
   if (prod.stock <= 0) {
     showModalAlert(
+      "info",
       "No tenemos más stock del producto por el momento, disculpe"
     );
     showProducts();
@@ -306,6 +307,7 @@ const addProductToCart = (prod, alertOK) => {
 const increaseQuantity = (prod) => {
   if (prod.stock <= 0) {
     showModalAlert(
+      "info",
       "No tenemos más stock del producto por el momento, disculpe"
     );
     showProducts();
@@ -416,7 +418,42 @@ const modalBtnClose = modal.querySelector(".btn-principal");
 modalBtnClose.onclick = () => {
   modal.close();
 };
-const showModalAlert = (text) => {
+const showModalAlert = (icon, text) => {
+  modal.querySelector("i").removeAttribute("class");
+  modal.querySelector("i").setAttribute("class", `fa fa-${icon}`);
   modal.querySelector("h3").textContent = text;
   modal.showModal();
 };
+
+const formPurchase = document.getElementById("formPurchase");
+
+formPurchase.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (cart.length == 0) {
+    showModalAlert(
+      "times",
+      "Debes agregar al menos 1 producto para realizar la compra"
+    );
+    return;
+  }
+
+  const formData = new FormData(formPurchase);
+  // for (let [name, value] of formData) {
+  //   console.log(`${name} = ${value}`);
+  // }
+  // localStorage.setItem("purchase", JSON.stringify(Array.from(formData)));
+  localStorage.removeItem("cart");
+  cart = [];
+  formPurchase.reset();
+
+  showModalAlert(
+    "check",
+    `Gracias ${formData.get("name")} por comprar en StreetWear.
+    Serás redireccionado en unos instantes`
+  );
+
+  setTimeout(() => {
+    window.location.reload();
+  }, 3000);
+});
