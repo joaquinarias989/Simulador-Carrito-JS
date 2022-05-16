@@ -410,7 +410,9 @@ formPurchase.addEventListener("submit", (e) => {
   const prodsWpp = cart
     .map(
       (item) =>
-        `Producto: ${item.nombre}\nCantidad: ${item.cantidad}\nSubtotal: $${
+        `Producto: ${item.nombre}\nColor: ${item.color}\nTalle: ${
+          item.talle
+        }\nCantidad: ${item.cantidad}\nSubtotal: $${
           item.precio * item.cantidad
         }`
     )
