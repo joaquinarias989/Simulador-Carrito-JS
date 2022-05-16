@@ -48,7 +48,7 @@ const prod1 = new Producto(
 );
 const prod2 = new Producto(
   "RRDA",
-  "Remera Risks & Dreams",
+  "Remera Risks and Dreams",
   2499,
   "Lorem ipsum dolor",
   "Amarillo",
@@ -225,7 +225,7 @@ const updateCart = () => {
 const addProductToCart = (prod, alertOK) => {
   if (prod.stock <= 0) {
     showModalAlert(
-      "info",
+      "warning",
       "No tenemos más stock del producto por el momento, disculpe"
     );
     showProducts();
@@ -307,7 +307,7 @@ const addProductToCart = (prod, alertOK) => {
 const increaseQuantity = (prod) => {
   if (prod.stock <= 0) {
     showModalAlert(
-      "info",
+      "warning",
       "No tenemos más stock del producto por el momento, disculpe"
     );
     showProducts();
@@ -413,18 +413,26 @@ const showAlertOK = (alertOK) => {
 
 // Modal
 const modal = document.getElementById("modal-alert");
-const modalBtnClose = modal.querySelector(".btn-principal");
+const modalIcon = modal.querySelector("i");
+const modalBtn = modal.querySelector(".btn-principal");
 
-modalBtnClose.onclick = () => {
+modalBtn.onclick = () => {
   modal.close();
 };
-const showModalAlert = (icon, text) => {
-  modal.querySelector("i").removeAttribute("class");
-  modal.querySelector("i").setAttribute("class", `fa fa-${icon}`);
+const showModalAlert = (type, text) => {
+  modalIcon.removeAttribute("class");
+  if (type == "success") {
+    modalIcon.setAttribute("class", "fa fa-check");
+    modalBtn.remove();
+  } else if (type == "warning") modalIcon.setAttribute("class", "fa fa-info");
+  else if (type == "error") modalIcon.setAttribute("class", "fa fa-times");
+
   modal.querySelector("h3").textContent = text;
+
   modal.showModal();
 };
 
+// Form
 const formPurchase = document.getElementById("formPurchase");
 
 formPurchase.addEventListener("submit", (e) => {
@@ -432,7 +440,7 @@ formPurchase.addEventListener("submit", (e) => {
 
   if (cart.length == 0) {
     showModalAlert(
-      "times",
+      "error",
       "Debes agregar al menos 1 producto para realizar la compra"
     );
     return;
@@ -442,18 +450,34 @@ formPurchase.addEventListener("submit", (e) => {
   // for (let [name, value] of formData) {
   //   console.log(`${name} = ${value}`);
   // }
-  localStorage.setItem("purchase", JSON.stringify(Array.from(formData)));
+  // const purchaseData = cart;
+  // purchaseData.push(Array.from(formData));
+
+  const elements = cart
+    .map(
+      (item) =>
+        `Producto: ${item.nombre}\nCantidad: ${item.cantidad}\nSubtotal: $${
+          item.precio * item.cantidad
+        }`
+    )
+    .join("\n\n");
+  const messageWpp = `Hola! Me gustaria hacer el siguiente pedido:\n\n${elementsWpp}\n\nEnvío: $ ${ship}\n\n*Total a pagar: ${totalHtml.textContent}*`;
+  const urlWpp = encodeURI(
+    `https://api.whatsapp.com/send?phone=543576412036&text=${messageWpp}`
+  );
+
   localStorage.removeItem("cart");
-  cart = [];
-  formPurchase.reset();
 
   showModalAlert(
-    "check",
-    `Gracias ${formData.get("name")} por comprar en StreetWear.
-    Serás redireccionado en unos instantes`
+    "success",
+    `Gracias ${formData.get(
+      "name"
+    )} por elegirnos. El total de tu compra es de ${totalHtml.textContent}.
+    Serás redireccionado en unos instantes.`
   );
 
   setTimeout(() => {
+    window.open(urlWpp, "_blank");
     window.location.reload();
-  }, 3000);
+  }, 5000);
 });
