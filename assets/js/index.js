@@ -24,15 +24,6 @@ class Producto {
   }
 }
 
-class Usuario {
-  constructor(id, nombre, email, contraseña) {
-    this.id = id;
-    this.nombre = nombre;
-    this.email = email;
-    this.contraseña = contraseña;
-  }
-}
-
 ////////////////////// Productos de prueba
 
 const prod1 = new Producto(
@@ -80,24 +71,8 @@ const prod4 = new Producto(
   0
 );
 
-////////////////////// Usuarios de prueba
-
-const usuario1 = new Usuario(
-  "JQN",
-  "Joaquin Arias",
-  "joaquinarias989@gmail.com",
-  "12345"
-);
-const usuario2 = new Usuario(
-  "FD",
-  "Federico Gimenez",
-  "fdg@gmail.com",
-  "fede123"
-);
-
 ////////////////////// Arrays, Variables,  DOM
 
-let users = [usuario1, usuario2];
 let products = [prod1, prod2, prod3, prod4];
 let cart = JSON.parse(localStorage.getItem("cart")) ?? [];
 
@@ -116,8 +91,29 @@ const templateProductCart = document.getElementById("product-cart").content;
 
 const fragment = document.createDocumentFragment();
 
-////////////////////// Muestra los Productos disponibles
+//////////////////////// Lógica de los Modales
 
+const modal = document.getElementById("modal-alert");
+const modalIcon = modal.querySelector("i");
+const modalBtn = modal.querySelector(".btn-principal");
+
+modalBtn.onclick = () => {
+  modal.close();
+};
+const showModalAlert = (type, text) => {
+  modalIcon.removeAttribute("class");
+  if (type == "success") {
+    modalIcon.setAttribute("class", "fa fa-check");
+    modalBtn.remove();
+  } else if (type == "warning") modalIcon.setAttribute("class", "fa fa-info");
+  else if (type == "error") modalIcon.setAttribute("class", "fa fa-times");
+
+  modal.querySelector("h3").textContent = text;
+
+  modal.showModal();
+};
+
+////////////////////// Muestra los Productos disponibles
 const showProducts = () => {
   listProducts.innerHTML = "";
   products.forEach((prod) => {
@@ -145,27 +141,7 @@ const showProducts = () => {
   listProducts.appendChild(fragment);
 };
 
-////////////////////// Inicializa el programa
-
-const init = () => {
-  try {
-    document.addEventListener("DOMContentLoaded", (e) => {
-      if (localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"));
-        updateCart();
-      }
-      showProducts();
-    });
-
-    shipInfo.textContent = `$ ${ship}`;
-    shipCart.textContent = `$ ${ship}`;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-init();
-
+////////////////////// Pinta el Carrito y actualiza el stock de productos según Local Storage
 const updateCart = () => {
   listCart.innerHTML = "";
   cart.forEach((prod) => {
@@ -222,6 +198,7 @@ const updateCart = () => {
   updateTotal();
 };
 
+////////////////////// Añade un producto al Carrito
 const addProductToCart = (prod, alertOK) => {
   if (prod.stock <= 0) {
     showModalAlert(
@@ -234,7 +211,7 @@ const addProductToCart = (prod, alertOK) => {
 
   prod.stock -= 1;
   prod.cantidad += 1;
-  showAlertOK(alertOK);
+  showToast(alertOK);
 
   if (cart.some((p) => p.id == prod.id)) {
     let indice = cart.findIndex((index) => index.id == prod.id);
@@ -304,6 +281,7 @@ const addProductToCart = (prod, alertOK) => {
   updateTotal();
 };
 
+////////////////////// Aumenta un producto del Carrito
 const increaseQuantity = (prod) => {
   if (prod.stock <= 0) {
     showModalAlert(
@@ -337,6 +315,7 @@ const increaseQuantity = (prod) => {
   updateTotal();
 };
 
+////////////////////// Disminuye un producto del Carrito
 const decreaseQuantity = (prod) => {
   const elements = listCart.getElementsByClassName("cart__product");
 
@@ -380,6 +359,7 @@ const decreaseQuantity = (prod) => {
   return;
 };
 
+////////////////////// Actualiza los Totales y el Local Storage
 const updateTotal = () => {
   let subtotal = 0;
   let total = 0;
@@ -402,7 +382,8 @@ const updateTotal = () => {
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
-const showAlertOK = (alertOK) => {
+////////////////////// Muestra el aviso de "Producto agregado exitosamente"
+const showToast = (alertOK) => {
   alertOK.classList.add("active");
   if (alertOK.classList.contains("active")) {
     setTimeout(() => {
@@ -411,28 +392,7 @@ const showAlertOK = (alertOK) => {
   }
 };
 
-// Modal
-const modal = document.getElementById("modal-alert");
-const modalIcon = modal.querySelector("i");
-const modalBtn = modal.querySelector(".btn-principal");
-
-modalBtn.onclick = () => {
-  modal.close();
-};
-const showModalAlert = (type, text) => {
-  modalIcon.removeAttribute("class");
-  if (type == "success") {
-    modalIcon.setAttribute("class", "fa fa-check");
-    modalBtn.remove();
-  } else if (type == "warning") modalIcon.setAttribute("class", "fa fa-info");
-  else if (type == "error") modalIcon.setAttribute("class", "fa fa-times");
-
-  modal.querySelector("h3").textContent = text;
-
-  modal.showModal();
-};
-
-// Form
+////////////////////// Lógica del Formulario que te lleva a terminar al compra por WhatsApp
 const formPurchase = document.getElementById("formPurchase");
 
 formPurchase.addEventListener("submit", (e) => {
@@ -447,13 +407,7 @@ formPurchase.addEventListener("submit", (e) => {
   }
 
   const formData = new FormData(formPurchase);
-  // for (let [name, value] of formData) {
-  //   console.log(`${name} = ${value}`);
-  // }
-  // const purchaseData = cart;
-  // purchaseData.push(Array.from(formData));
-
-  const elements = cart
+  const prodsWpp = cart
     .map(
       (item) =>
         `Producto: ${item.nombre}\nCantidad: ${item.cantidad}\nSubtotal: $${
@@ -461,7 +415,21 @@ formPurchase.addEventListener("submit", (e) => {
         }`
     )
     .join("\n\n");
-  const messageWpp = `Hola! Me gustaria hacer el siguiente pedido:\n\n${elementsWpp}\n\nEnvío: $ ${ship}\n\n*Total a pagar: ${totalHtml.textContent}*`;
+
+  const messageWpp = `Hola! Quiero realizar la siguiente compra:\n\n${prodsWpp}\n\nEnvío: $ ${ship}\n*Total a pagar: ${
+    totalHtml.textContent
+  }*\n\nDetallo mis datos:\n\nNombre: ${formData.get(
+    "name"
+  )}\nEmail: ${formData.get("email")}\nCód. Postal: ${formData.get(
+    "postalcode"
+  )}\nProvincia: ${formData
+    .get("province")
+    .toUpperCase()}\nDomicilio: ${formData.get(
+    "address"
+  )}\nDepartamento: ${formData.get("department")}\nTeléfono: ${formData.get(
+    "phone"
+  )}\nDNI/CUIL: ${formData.get("dni")}`;
+
   const urlWpp = encodeURI(
     `https://api.whatsapp.com/send?phone=543576412036&text=${messageWpp}`
   );
@@ -481,3 +449,26 @@ formPurchase.addEventListener("submit", (e) => {
     window.location.reload();
   }, 5000);
 });
+
+//////////////////////
+////////////////////// Función principal - Inicializa el programa
+//////////////////////
+
+const init = () => {
+  try {
+    document.addEventListener("DOMContentLoaded", (e) => {
+      if (localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"));
+        updateCart();
+      }
+      showProducts();
+    });
+
+    shipInfo.textContent = `$ ${ship}`;
+    shipCart.textContent = `$ ${ship}`;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+init();
