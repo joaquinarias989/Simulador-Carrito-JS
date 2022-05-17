@@ -1114,6 +1114,9 @@ main.bg-bricks {
   padding: 0.2rem 0;
   width: 100%;
 }
+.products .section__header .dropdown-menu .form__input {
+  font-size: inherit;
+}
 @media (max-width: 425px) {
   .products .section__header .dropdown-menu {
     min-width: 22rem;

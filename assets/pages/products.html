@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STREETWEAR | Productos</title>
+    <meta
+      name="description"
+      content="Todos los productos que siempre quisiste en un sólo lugar. Encontrá esa prenda que tanto venis buscando, pasá y enamorate!"
+    />
+    <meta
+      name="keywords"
+      content="ropa, streetwear, remeras, buzos, hoodies, camperas, abrigos, pantalones, bermudas, shorts, medias, zapatillas, accesorios, urbano, deportivo, elegante, outfit "
+    />
+    <link rel="icon" type="image/x-icon" href="../img/favicon.svg" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/aos.css" />
+  </head>
+  <body class="bg-light">
+    <header class="bg-bricks">
+      <nav class="navbar container flex-row navbar-expand-lg navbar-light">
+        <a href="../../index.html">
+          <picture class="logo flex-row">
+            <img
+              src="../img/logo.svg"
+              alt="Logo de la tienda StreetWear, en color blanco y amarillo"
+              width="100%"
+              height="100%"
+            />
+          </picture>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          id="btnMenu"
+        >
+          <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-lg-auto">
+            <li>
+              <a href="./products.html" class="menu__link menu__link--active"
+                >Productos</a
+              >
+            </li>
+            <li>
+              <a href="../../index.html#help" class="menu__link">Ayuda</a>
+            </li>
+            <li>
+              <a href="../../index.html#about" class="menu__link">Nosotros</a>
+            </li>
+            <li>
+              <a href="../../index.html#contact" class="menu__link">Contacto</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav mb-2 mb-lg-0 flex-row jc-between">
+            <li class="dropdown-link">
+              <a class="menu__link" role="button" aria-label="Cuenta de Usuario"
+                ><i class="fas fa-user text-white"></i
+              ></a>
+              <ul class="sub-menu bg-bricks">
+                <li>
+                  <a href="./login.html" class="menu__link">Ingresar</a>
+                </li>
+                <li>
+                  <a href="./register.html" class="menu__link">Registrarse</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="./cart.html" class="menu__link menu__link--cart"
+                ><i class="fas fa-shopping-bag text-white"></i></a
+              ><span class="cart-quantity"></span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="products" class="products container">
+        <div class="section__header row">
+          <div class="col-md-10">
+            <h1 class="title-primary">Productos</h1>
+            <!-- <ol class="breadcrumb">
+              <li><a href="../../index.html">Inicio</a></li>
+              <li>Productos</li>
+            </ol> -->
+          </div>
+          <div class="col-md-2 d-flex justify-content-end align-items-start">
+            <div class="btn-group">
+              <button
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label="Filtrar productos"
+              >
+                <i class="fa fa-filter"></i>
+              </button>
+              <div class="dropdown-menu p-4 filter">
+                <h5 class="text-center">¿Qué estás buscando?</h5>
+                <input
+                  class="form__input mt-3"
+                  type="search"
+                  placeholder="Producto, Categoría, Color..."
+                />
+                <ul class="mt-3">
+                  <p class="mb-1 fw-bold position-relative text-overline">
+                    Categoría
+                  </p>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="Remeras"
+                    />
+                    Remeras
+                  </li>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="Pantalones"
+                    />
+                    Pantalones
+                  </li>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="Buzos"
+                    />
+                    Buzos
+                  </li>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="Camperas"
+                    />
+                    Camperas
+                  </li>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="Accesorios"
+                    />
+                    Accesorios
+                  </li>
+                </ul>
+                <ul class="mt-3">
+                  <p class="mb-1 fw-bold position-relative text-overline">
+                    Talle
+                  </p>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="S"
+                    />
+                    S
+                  </li>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="M"
+                    />
+                    M
+                  </li>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="L"
+                    />
+                    L
+                  </li>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="XL"
+                    />
+                    XL
+                  </li>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="XXL"
+                    />
+                    XXL
+                  </li>
+                  <li>
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="Oversize"
+                    />
+                    Oversize
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="products__list d-flex justify-content-evenly justify-content-md-start"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        >
+          <template id="product-card">
+            <article class="product__card">
+              <a>
+                <div class="product__card__img">
+                  <img alt="" />
+                </div>
+                <div class="product__card__info">
+                  <h4 class="product__card__title"></h4>
+                  <h4 class="product__card__price"></h4>
+                  <div class="product__card__btn flex-row">
+                    <button
+                      class="btn-cart"
+                      aria-label="Agregar producto al carrito"
+                    >
+                      Agregar al carrito <i class="fa fa-cart-plus"></i>
+                    </button>
+                    <span id="alertOK">Producto agregado con éxito!</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          </template>
+        </div>
+
+        <!-- <div class="flex-row jc-center algn-items-center">
+          <button class="btn-principal" aria-label="Cargar más productos">
+            <i class="fas fa-plus"></i> Cargar más
+          </button>
+        </div> -->
+      </section>
+
+      <dialog id="modal-alert" class="modal-alert">
+        <i></i>
+        <h3></h3>
+        <button class="btn-principal">OK</button>
+      </dialog>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__info flex-column flex-md-row">
+          <a href="../../index.html" aria-label="Navegar a la página de inicio"
+            ><i class="fas fa-home"></i
+          ></a>
+
+          <div class="footer__payment flex-column">
+            <strong>Todos los métodos de pago</strong>
+            <div class="icons flex-row">
+              <i class="fa fa-credit-card"></i>
+              <i class="fab fa-bitcoin"></i>
+              <i class="fa fa-money-bill-alt"></i>
+            </div>
+          </div>
+          <div class="footer__logo flex-column">
+            <span>STREET</span><span>WEAR</span>
+          </div>
+          <p>&copy; 2022 Derechos Reservados</p>
+          <a href="#" aria-label="Ir al comienzo de la página"
+            ><i class="fas fa-arrow-up"></i
+          ></a>
+        </div>
+
+        <div class="footer__social flex-row">
+          <a
+            href="https://www.facebook.com"
+            class="fab fa-facebook"
+            target="_blank"
+            aria-label="Facebook"
+          ></a>
+          <a
+            href="https://www.instagram.com/streetwear1__/"
+            class="fab fa-instagram"
+            target="_blank"
+            aria-label="Instagram"
+          ></a>
+          <a
+            href="https://www.twitter.com"
+            class="fab fa-twitter"
+            target="_blank"
+            aria-label="Twitter"
+          ></a>
+          <a
+            href="#"
+            class="fa fa-share"
+            target="_blank"
+            aria-label="Compartir"
+          ></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+
+  <script src="../js/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/classes/Product.js"></script>
+  <script src="../js/pages/products.js"></script>
+</html>

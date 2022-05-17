@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STREETWEAR | Iniciar Sesión</title>
+    <meta
+      name="description"
+      content="Iniciá sesión en STREET WEAR para comprar de forma rápida y llevar el control de tus pedidos. ¡Hola de nuevo!"
+    />
+    <meta
+      name="keywords"
+      content="login, sesión, ingresar, ingreso, logearte, accesibilidad, sign"
+    />
+    <link rel="icon" type="image/x-icon" href="../img/favicon.svg" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/aos.css" />
+  </head>
+  <body class="bg-bricks">
+    <header class="bg-bricks">
+      <nav class="navbar container flex-row navbar-expand-lg">
+        <a href="../../index.html">
+          <picture class="logo flex-row">
+            <img
+              src="../img/logo.svg"
+              alt="Logo de la tienda StreetWear, en color blanco y amarillo"
+              width="100%"
+              height="100%"
+            />
+          </picture>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          id="btnMenu"
+        >
+          <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-lg-auto">
+            <li>
+              <a href="products.html" class="menu__link">Productos</a>
+            </li>
+            <li>
+              <a href="../../index.html#help" class="menu__link">Ayuda</a>
+            </li>
+            <li>
+              <a href="../../index.html#about" class="menu__link">Nosotros</a>
+            </li>
+            <li>
+              <a href="../../index.html#contact" class="menu__link">Contacto</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav mb-2 mb-lg-0 flex-row jc-between">
+            <li class="dropdown-link">
+              <a class="menu__link" role="button" aria-label="Cuenta de Usuario"
+                ><i class="fas fa-user text-white"></i
+              ></a>
+              <ul class="sub-menu bg-bricks">
+                <li>
+                  <a href="login.html" class="menu__link menu__link--active"
+                    >Ingresar</a
+                  >
+                </li>
+                <li>
+                  <a href="register.html" class="menu__link">Registrarse</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="cart.html"
+                role="button"
+                class="menu__link"
+                aria-label="Carrito de compras"
+                ><i class="fas fa-shopping-bag text-white"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section
+        id="login"
+        class="login container"
+        data-aos="fade-right"
+        data-aos-duration="1000"
+      >
+        <h1 class="title-primary">Iniciar Sesión</h1>
+        <div class="row justify-content-between mt-5">
+          <div class="col-md-7 col-lg-6">
+            <form class="form__paper">
+              <div class="input__box">
+                <label for="email" class="form__label">Email</label>
+                <input type="email" id="email" class="form__input" required />
+              </div>
+              <div class="input__box">
+                <label for="password" class="form__label">Contraseña</label>
+                <input
+                  type="password"
+                  id="password"
+                  class="form__input"
+                  required
+                />
+              </div>
+              <a
+                href="#"
+                class="text-accent d-block text-end"
+                data-bs-toggle="modal"
+                data-bs-target="#modalRecover"
+                >¿Olvidaste tu contraseña?</a
+              >
+              <button type="submit" class="btn-principal">
+                <i class="fa fa-sign-in-alt"></i> Iniciar sesión
+              </button>
+              <p>
+                ¿No tenes cuenta?
+                <a href="./register.html" class="text-accent">¡Creála!</a>
+              </p>
+            </form>
+          </div>
+          <div
+            class="icons col-md-3 d-flex flex-md-column justify-content-center align-items-center mt-5 mt-md-0"
+          >
+            <i class="fa fa-user"></i>
+            <i class="fas fa-hand-peace"></i>
+          </div>
+        </div>
+      </section>
+
+      <div
+        class="modal fade"
+        id="modalRecover"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="title-primary w-100" id="exampleModalLabel">
+                Recuperar contraseña
+              </h2>
+            </div>
+            <form action="">
+              <div class="modal-body">
+                <div class="input__box">
+                  <label for="email-recover" class="form__label">Email</label>
+                  <input
+                    type="email"
+                    id="email-recover"
+                    class="form__input"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="reset"
+                  class="btn-secundario"
+                  data-bs-dismiss="modal"
+                  aria-label="Cerrar"
+                >
+                  <i class="fa fa-times"></i>Cancelar
+                </button>
+                <button
+                  type="submit"
+                  class="btn-principal"
+                  aria-label="Enviar correo"
+                >
+                  <i class="fa fa-paper-plane"></i> Enviar correo
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__info flex-column flex-md-row">
+          <a href="../../index.html" aria-label="Navegar a la página de inicio"
+            ><i class="fas fa-home"></i
+          ></a>
+
+          <div class="footer__payment flex-column">
+            <strong>Todos los métodos de pago</strong>
+            <div class="icons flex-row">
+              <i class="fa fa-credit-card"></i>
+              <i class="fab fa-bitcoin"></i>
+              <i class="fa fa-money-bill-alt"></i>
+            </div>
+          </div>
+          <div class="footer__logo flex-column">
+            <span>STREET</span>
+            <span>WEAR</span>
+          </div>
+          <p>&copy; 2022 Derechos Reservados</p>
+
+          <a href="#" aria-label="Ir al comienzo de la página"
+            ><i class="fas fa-arrow-up"></i
+          ></a>
+        </div>
+
+        <div class="footer__social flex-row">
+          <a
+            href="https://www.facebook.com"
+            class="fab fa-facebook"
+            target="_blank"
+            aria-label="Facebook"
+          ></a>
+          <a
+            href="https://www.instagram.com/streetwear1__/"
+            class="fab fa-instagram"
+            target="_blank"
+            aria-label="Instagram"
+          ></a>
+          <a
+            href="https://www.twitter.com"
+            class="fab fa-twitter"
+            target="_blank"
+            aria-label="Twitter"
+          ></a>
+          <a
+            href="#"
+            class="fa fa-share"
+            target="_blank"
+            aria-label="Compartir"
+          ></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+
+  <script src="../js/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+</html>

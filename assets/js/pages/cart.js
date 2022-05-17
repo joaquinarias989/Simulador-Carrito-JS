@@ -1,81 +1,7 @@
-////////////////////// CLASES
-
-class Producto {
-  constructor(
-    id,
-    nombre,
-    precio,
-    descripcion,
-    color,
-    talle,
-    stock,
-    img,
-    cantidad
-  ) {
-    this.id = id;
-    this.nombre = nombre;
-    this.precio = precio;
-    this.descripcion = descripcion;
-    this.color = color;
-    this.talle = talle;
-    this.stock = stock;
-    this.img = img;
-    this.cantidad = cantidad;
-  }
-}
-
-////////////////////// Productos de prueba
-
-const prod1 = new Producto(
-  "RMPN",
-  "Remera Phenomenally",
-  2380,
-  "Lorem ipsum dolor",
-  "Negro",
-  "M",
-  2,
-  "./assets/img/shirt-yellow.webp",
-  0
-);
-const prod2 = new Producto(
-  "RRDA",
-  "Remera Risks and Dreams",
-  2499,
-  "Lorem ipsum dolor",
-  "Amarillo",
-  "XL",
-  3,
-  "./assets/img/tshirt-2.webp",
-  0
-);
-const prod3 = new Producto(
-  "BCN",
-  "Buzo Chineze",
-  4630,
-  "Lorem ipsum dolor",
-  "Negro",
-  "L",
-  2,
-  "./assets/img/buzo.webp",
-  0
-);
-const prod4 = new Producto(
-  "JBN",
-  "Jacket Bomber",
-  5500,
-  "Lorem ipsum dolor",
-  "Negro",
-  "S",
-  2,
-  "./assets/img/campera.webp",
-  0
-);
-
 ////////////////////// Arrays, Variables,  DOM
 
-let products = [prod1, prod2, prod3, prod4];
 let cart = JSON.parse(localStorage.getItem("cart")) ?? [];
-
+let user = JSON.parse(localStorage.getItem("user")) ?? {};
 let ship = 475;
 
 const shipCart = document.getElementById("ship-cart");
@@ -83,7 +9,7 @@ const shipInfo = document.getElementById("ship-data");
 const subtotalHtml = document.getElementById("subtotal");
 const totalHtml = document.getElementById("total");
 
-const listProducts = document.querySelector(".products__list");
+const listProducts = document.querySelector(".interes__slide");
 const templateProduct = document.getElementById("product-card").content;
 
 const listCart = document.querySelector(".cart__resume__products");
@@ -114,30 +40,43 @@ const showModalAlert = (type, text) => {
 };
 
 ////////////////////// Muestra los Productos disponibles
-const showProducts = () => {
-  listProducts.innerHTML = "";
-  products.forEach((prod) => {
-    if (prod.stock > 0) {
-      templateProduct
-        .querySelector(".product__card")
-        .setAttribute("id", prod.id);
-      templateProduct.querySelector("img").setAttribute("src", prod.img);
-      templateProduct.querySelector(".product__card__title").textContent =
-        prod.nombre;
-      templateProduct.querySelector(
-        ".product__card__price"
-      ).textContent = `$ ${prod.precio}`;
+const showProducts = (by) => {
+  listProducts.innerHTML = `<article class="w-100 text-center">
+  <h2>No se encontraron Productos</h2>
+</article>`;
+  by === undefined ? (by = "") : (by = by.trim().toLowerCase());
+  products
+    .filter(
+      (p) =>
+        p.nombre.toLowerCase().includes(by) ||
+        p.categoria.toLowerCase().includes(by) ||
+        p.color.toLowerCase().includes(by)
+    )
+    .forEach((prod) => {
+      if (prod.stock > 0) {
+        listProducts.innerHTML = "";
 
-      const clone = templateProduct.cloneNode(true);
+        templateProduct
+          .querySelector(".product__card")
+          .setAttribute("id", prod.id);
+        templateProduct.querySelector("img").setAttribute("src", prod.img);
+        templateProduct.querySelector(".product__card__title").textContent =
+          prod.nombre;
+        templateProduct.querySelector(
+          ".product__card__price"
+        ).textContent = `$ ${prod.precio}`;
 
-      const alertOK = clone.querySelector("#alertOK");
-      clone
-        .querySelector(".btn-cart")
-        .addEventListener("click", () => addProductToCart(prod, alertOK));
+        const clone = templateProduct.cloneNode(true);
 
-      fragment.appendChild(clone);
-    }
-  });
+        const alertOK = clone.querySelector("#alertOK");
+        clone
+          .querySelector(".btn-cart")
+          .addEventListener("click", () => addProductToCart(prod, alertOK));
+
+        fragment.appendChild(clone);
+      }
+    });
+
   listProducts.appendChild(fragment);
 };
 
@@ -394,6 +333,13 @@ const showToast = (alertOK) => {
 
 ////////////////////// Lógica del Formulario que te lleva a terminar al compra por WhatsApp
 const formPurchase = document.getElementById("formPurchase");
+if (user.hasOwnProperty("nombre")) {
+  formPurchase.elements["email"].value = user.email;
+  formPurchase.elements["name"].value = user.nombre;
+  formPurchase.elements["postalcode"].value = user.codpostal;
+  formPurchase.elements["province"].value = user.provincia;
+  formPurchase.elements["address"].value = user.domicilio;
+}
 
 formPurchase.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -437,6 +383,7 @@ formPurchase.addEventListener("submit", (e) => {
   );
 
   localStorage.removeItem("cart");
+  localStorage.removeItem("user");
 
   showModalAlert(
     "success",

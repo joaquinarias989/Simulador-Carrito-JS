@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>STREETWEAR | Carrito</title>
     <meta
       name="description"
-      content="En esta página podrás pagar tus prendas de forma sencilla. Tus datos están totalmente protegidos, ¡comprá tranquilo!"
+      content="Tienda de ropa urbana en la que encontrarás todo lo necesario para vestirte como siempre quisiste, desde remeras, abrigos y hasta accesorios, para lucir un outfit perfecto."
     />
     <meta
       name="keywords"
-      content="carrito, compra, compras, precios, subtotal, total, detalle"
+      content="ropa, streetwear, remeras, buzos, hoodies, camperas, abrigos, pantalones, bermudas, shorts, medias, zapatillas, accesorios, urbano, deportivo, elegante, outfit"
     />
+    <title>STREETWEAR</title>
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.svg" />
     <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.css" />
     <link
@@ -25,7 +25,7 @@
   </head>
   <body>
     <header class="bg-bricks">
-      <nav class="navbar container flex-row navbar-expand-lg">
+      <nav class="navbar container flex-row navbar-expand-lg navbar-light">
         <a href="index.html">
           <picture class="logo flex-row">
             <img
@@ -36,6 +36,7 @@
             />
           </picture>
         </a>
+
         <button
           class="navbar-toggler"
           type="button"
@@ -51,381 +52,365 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-lg-auto">
             <li>
-              <a href="products.html" class="menu__link menu__link--active"
+              <a href="./assets/pages/products.html" class="menu__link"
                 >Productos</a
               >
             </li>
+            <li><a href="#help" class="menu__link">Ayuda</a></li>
             <li>
-              <a href="../../index.html#help" class="menu__link">Ayuda</a>
+              <a href="#about" class="menu__link">Nosotros</a>
             </li>
             <li>
-              <a href="../../index.html#about" class="menu__link">Nosotros</a>
-            </li>
-            <li>
-              <a href="../../index.html#contact" class="menu__link">Contacto</a>
+              <a href="#contact" class="menu__link">Contacto</a>
             </li>
           </ul>
           <ul class="navbar-nav mb-2 mb-lg-0 flex-row jc-between">
             <li class="dropdown-link">
-              <a class="menu__link" role="button"
+              <a class="menu__link" role="button" aria-label="Cuenta de Usuario"
                 ><i class="fas fa-user text-white"></i
               ></a>
               <ul class="sub-menu bg-bricks">
                 <li>
-                  <a href="login.html" class="menu__link">Ingresar</a>
+                  <a href="./assets/pages/login.html" class="menu__link"
+                    >Ingresar</a
+                  >
                 </li>
                 <li>
-                  <a href="register.html" class="menu__link">Registrarse</a>
+                  <a href="./assets/pages/register.html" class="menu__link"
+                    >Registrarse</a
+                  >
                 </li>
               </ul>
             </li>
             <li>
-              <a href="index.html" class="menu__link menu__link--cart"
-                ><i class="fas fa-shopping-bag text-white"></i></a
-              ><span class="cart-quantity"></span>
+              <a
+                href="./assets/pages/cart.html"
+                class="menu__link"
+                aria-label="Carrito de compras"
+                ><i class="fas fa-shopping-bag text-white"></i
+              ></a>
             </li>
           </ul>
         </div>
       </nav>
     </header>
 
-    <main>
-      <section id="products" class="products container">
-        <div class="section__header row">
-          <div class="col-md-10">
-            <h1 class="title-primary">Productos</h1>
-            <!-- <ol class="breadcrumb">
-              <li><a href="../../index.html">Inicio</a></li>
-              <li>Productos</li>
-            </ol> -->
-          </div>
-          <div class="col-md-2 d-flex justify-content-end align-items-start">
-            <div class="btn-group">
-              <button
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                aria-label="Filtrar productos"
-              >
-                <i class="fa fa-filter"></i>
-              </button>
-              <div class="dropdown-menu p-4">
-                <h5 class="text-center mb-4">¿Qué estás buscando?</h5>
-                <ul class="mt-3">
-                  <p class="mb-1 fw-bold position-relative text-overline">
-                    Categoría
-                  </p>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    Remeras
-                  </li>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    Pantalones
-                  </li>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    Buzos
-                  </li>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    Camperas
-                  </li>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    Accesorios
-                  </li>
-                </ul>
-                <ul class="mt-3">
-                  <p class="mb-1 fw-bold position-relative text-overline">
-                    Talle
-                  </p>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    S
-                  </li>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    M
-                  </li>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    L
-                  </li>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    XL
-                  </li>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    XXL
-                  </li>
-                  <li>
-                    <input class="form-check-input me-1" type="checkbox" />
-                    Oversize
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="products__list d-flex justify-content-evenly justify-content-md-start"
-          data-aos="fade-right"
-          data-aos-duration="1000"
+    <main class="bg-bricks">
+      <section id="welcome" class="welcome">
+        <a
+          type="button"
+          class="btn-principal"
+          href="./assets/pages/products.html"
+          ><i class="fas fa-shopping-bag me-2"></i> Comprar ahora</a
         >
-          <template id="product-card"
-            ><article class="product__card">
-              <a>
-                <div class="product__card__img">
-                  <img alt="" />
-                </div>
-                <div class="product__card__info">
-                  <h4 class="product__card__title"></h4>
-                  <h4 class="product__card__price"></h4>
-                  <div class="product__card__btn flex-row">
-                    <button
-                      class="btn-cart"
-                      aria-label="Agregar producto al carrito"
-                    >
-                      Agregar al carrito <i class="fa fa-cart-plus"></i>
-                    </button>
-                    <span id="alertOK">Producto agregado con éxito!</span>
-                  </div>
-                </div>
-              </a>
-            </article></template
+      </section>
+
+      <section id="categories" class="categories container">
+        <div class="flex-row" data-aos="fade-right" data-aos-duration="1000">
+          <article class="flex-column">
+            <img
+              src="./assets/img/hanger.svg"
+              alt="Percha de madera clara"
+              width="100%"
+              height="100%"
+            />
+            <button class="btn-secundario">Abrigos</button>
+          </article>
+          <article class="flex-column">
+            <img
+              src="./assets/img/hanger.svg"
+              alt="Percha de madera clara"
+              width="100%"
+              height="100%"
+            />
+            <button class="btn-secundario">Remeras</button>
+          </article>
+          <article class="flex-column">
+            <img
+              src="./assets/img/hanger.svg"
+              alt="Percha de madera clara"
+              width="100%"
+              height="100%"
+            />
+            <button class="btn-secundario">Pantalones</button>
+          </article>
+        </div>
+        <div class="flex-row mt-5" data-aos="fade-up" data-aos-duration="1000">
+          <a
+            href="./assets/pages/products.html"
+            type="button"
+            class="btn-principal"
+            >Ver todos los productos</a
           >
         </div>
+      </section>
 
-        <div class="flex-row jc-center algn-items-center">
-          <button class="btn-principal" aria-label="Cargar más productos">
-            <i class="fas fa-plus"></i> Cargar más
-          </button>
+      <section id="help" class="help container">
+        <div
+          class="row align-items-center justify-content-between flex-wrap-reverse"
+        >
+          <div
+            class="help__icons col-xl-3 d-flex flex-xl-column justify-content-center align-items-center flex-wrap"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
+            <i class="fas fa-shopping-cart"></i>
+            <i class="fas fa-question"></i>
+          </div>
+          <article
+            class="help__content col-xl-9 d-flex flex-column justify-content-end align-items-end"
+            data-aos="fade-left"
+            data-aos-duration="1000"
+          >
+            <h2 class="title-primary">¿Cómo compro?</h2>
+            <div class="help__list">
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">1</span>
+                <p>
+                  Elegí el producto, el talle, y hacé click en Agregar al
+                  carrito.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-down"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">2</span>
+                <p>
+                  Si querés, podes seguir agregando otros productos al carrito,
+                  sino, hacé clic en Iniciar Compra. En este paso vas a poder
+                  calcular el costo de envío.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-right"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">3</span>
+                <p>
+                  Completá tus datos de contacto (y de facturación en caso de
+                  que lo requieras) y hacé clic en Continuar.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-left"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">4</span>
+                <p>
+                  Seleccioná el método de envío que desees (envíos a todo el
+                  país por Correo o A Coordinar), completá los datos del mismo y
+                  hacé clic en Continuar.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">5</span>
+                <p>
+                  Elegí el método de pago que prefieras (para Efectivo
+                  seleccioná Pago Fácil o Rapipago), rellená los datos
+                  solicitados para realizar la compra y hacé clic en Finalizar.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-column flex-sm-row my-3 my-sm-0"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <span class="w-25">6</span>
+                <p>
+                  ¡Listo! Revisá tu correo, en unos minutos va a llegar toda la
+                  información correspondiente a tu compra y el envío de la
+                  misma.
+                </p>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
-      <dialog id="modal-alert" class="modal-alert">
-        <i class="fa fa-bars"></i>
-        <h3></h3>
-        <button class="btn-principal">OK</button>
-      </dialog>
-      <section
-        id="cart"
-        class="cart container"
-        data-aos="fade-right"
-        data-aos-duration="1000"
-      >
-        <h1 class="title-primary">Iniciar Compra</h1>
-        <div class="row justify-content-between w-100">
-          <article class="cart__data col-md-6 flex-column">
-            <div id="accordionData">
-              <div class="cart__ship">
-                <h2 class="text-leftline" id="panelsStayOpen-headingOne">
+
+      <section id="about" class="about container">
+        <div class="row align-items-center justify-content-between">
+          <article
+            class="about__content col-md-8 col-lg-7 d-flex flex-column align-items-start"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
+            <h2 class="title-primary">¿Quiénes Somos?</h2>
+            <div class="accordion__paper ms-md-5" id="accordionExample">
+              <div>
+                <h3 id="headingOne">
                   <button
                     class="accordion-button"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseOne"
+                    data-bs-target="#collapseOne"
                     aria-expanded="true"
-                    aria-controls="panelsStayOpen-collapseOne"
+                    aria-controls="collapseOne"
                   >
-                    <span>Entrega</span>
+                    <span class="text-overline">Nosotros</span>
                   </button>
-                </h2>
-
+                </h3>
                 <div
-                  id="panelsStayOpen-collapseOne"
+                  id="collapseOne"
                   class="accordion-collapse collapse show"
-                  aria-labelledby="panelsStayOpen-headingOne"
+                  aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample"
                 >
-                  <div class="flex-row jc-between algn-items-center mt-4">
-                    <p>Correo Argentino - Envío a Domicilio</p>
-                    <span class="text-overline" id="ship-data"></span>
-                  </div>
+                  <p>
+                    Diego Percaz y todo el equipo, de Arroyito Córdoba para todo
+                    el mundo. En la constante búsqueda de
+                    <strong>prendas únicas</strong> e increíbles.
+                  </p>
                 </div>
               </div>
-              <form id="formPurchase" action="#">
-                <div class="cart__personal mt-5">
-                  <h2 class="text-leftline mb-1" id="panelsStayOpen-headingTwo">
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#panelsStayOpen-collapseTwo"
-                      aria-expanded="true"
-                      aria-controls="panelsStayOpen-collapseTwo"
-                    >
-                      <span>Datos del Destinatario</span>
-                    </button>
-                  </h2>
-                  <div
-                    id="panelsStayOpen-collapseTwo"
-                    class="accordion-collapse collapse show"
-                    aria-labelledby="panelsStayOpen-headingTwo"
+              <div class="mt-5">
+                <h3 id="headingTwo">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
                   >
-                    <p class="text-end">
-                      ¿Ya tenes cuenta?
-                      <a href="./login.html" class="text-accent"
-                        >¡Iniciá sesión!</a
-                      >
-                    </p>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      class="form__input mt-5"
-                      placeholder="Email"
-                      required
-                    />
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      class="form__input"
-                      placeholder="Nombre y Apellido"
-                      required
-                    />
-                    <div class="flex-row jc-between">
-                      <input
-                        type="number"
-                        name="postalcode"
-                        class="form__input"
-                        placeholder="Cód. Postal"
-                        required
-                      />
-                      <select name="province" class="form__input" required>
-                        <option value="" selected disabled>Provincia</option>
-                        <option value="cba">Córdoba</option>
-                        <option value="bsas">Buenos Aires</option>
-                        <option value="stafe">Santa Fe</option>
-                      </select>
-                    </div>
-                    <input
-                      type="text"
-                      name="address"
-                      class="form__input"
-                      placeholder="Domicilio"
-                      required
-                    />
-                    <input
-                      type="text"
-                      name="department"
-                      class="form__input"
-                      placeholder="Departamento (opcional)"
-                    />
-                    <input
-                      type="number"
-                      name="phone"
-                      class="form__input"
-                      placeholder="Télefono"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="cart__fact mt-5">
-                  <h2
-                    class="text-leftline mb-4"
-                    id="panelsStayOpen-headingThree"
-                  >
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#panelsStayOpen-collapseThree"
-                      aria-expanded="true"
-                      aria-controls="panelsStayOpen-collapseThree"
-                    >
-                      <span>Datos de Facturación</span>
-                    </button>
-                  </h2>
-                  <div
-                    id="panelsStayOpen-collapseThree"
-                    class="accordion-collapse collapse show"
-                    aria-labelledby="panelsStayOpen-headingThree"
-                  >
-                    <input
-                      type="number"
-                      name="dni"
-                      class="form__input"
-                      placeholder="DNI ó CUIL"
-                      required
-                    />
-                    <div class="checkbox__box d-flex gap-2">
-                      <input
-                        type="checkbox"
-                        name="check"
-                        class="form-check-input"
-                        id="check"
-                      />
-                      <label for="check"
-                        >Mis datos de facturación y entrega son los mismos
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  class="btn-principal mt-5 w-100"
-                  aria-label="Pagar"
+                    <span class="text-overline">Inicios</span>
+                  </button>
+                </h3>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample"
                 >
-                  <i class="fa fa-money-bill-alt"></i>
-                  Continuar al pago
-                </button>
-              </form>
+                  <p>
+                    Arrancamos con el objetivo de traer a nuestro pueblo,
+                    prendas que no se conseguían accesiblemente, y de estilos
+                    que no eran muy populares en la zona. Gracias a esto,
+                    conocimos varios lugares del país y nos familiarizamos con
+                    el mundo de la
+                    <strong>moda urbana</strong>.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-5">
+                <h3 id="headingThree">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                    <span class="text-overline">Actualidad</span>
+                  </button>
+                </h3>
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingThree"
+                  data-bs-parent="#accordionExample"
+                >
+                  <p>
+                    Ahora nuestros clientes objetivos no son sólo de nuestro
+                    pueblo, sino que logramos una <strong>fidelidad</strong> con
+                    amigos de todo el país. Como planes a futuro tenemos pensado
+                    incursionar en el mundo del diseño y fabricación de prendas
+                    propias.
+                  </p>
+                </div>
+              </div>
             </div>
           </article>
-          <article
-            class="cart__resume ps-md-5 ps-xl-0 col-md-6 col-xl-4 flex-column"
+          <div
+            class="about__icons col-md-3 col-lg-4 d-flex flex-md-column justify-content-center align-items-center flex-wrap"
+            data-aos="fade-left"
+            data-aos-duration="1000"
           >
-            <div class="cart__resume__products flex-column">
-              <template id="product-cart">
-                <div class="cart__product">
-                  <div class="cart__product__img">
-                    <img src="./assets/img/img-ejemplo.png" />
-                  </div>
-                  <div class="cart__product__info">
-                    <h3
-                      class="cart__product__title text-underlined"
-                      id="product__name"
-                    ></h3>
-                    <p id="details"></p>
-                    <div class="d-flex algn-items-center jc-between gap-3 pe-3">
-                      <p>
-                        Cantidad:
-                        <span class="input-quantity"></span>
-                      </p>
-                      <div class="d-flex algn-items-center btn-group">
-                        <button id="addOne" class="btn-principal">
-                          <i class="fa fa-plus"></i>
-                        </button>
-                        <button id="reduceOne" class="btn-secundario d-none">
-                          <i class="fa fa-minus"></i>
-                        </button>
-                        <button id="removeProd" class="btn-remove">
-                          <i class="fa fa-trash"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <h3 id="price"></h3>
-                  </div>
-                </div>
-              </template>
-            </div>
+            <img
+              src="./assets/img/logo.svg"
+              alt="Logo de la tienda StreetWear en color blanco y amarillo"
+              width="100%"
+              height="100%"
+            />
+            <i class="fas fa-info"></i>
+          </div>
+        </div>
+      </section>
 
-            <div class="cart__subtotal flex-column">
-              <h4 class="flex-row jc-between algn-items-center">
-                Subtotal <span id="subtotal"></span>
-              </h4>
-              <h4 class="flex-row jc-between algn-items-center">
-                Costo de Envío <span id="ship-cart"></span>
-              </h4>
-            </div>
-            <div
-              class="cart__total flex-row flex-wrap jc-between algn-items-center"
+      <section id="contact" class="contact container">
+        <div
+          class="row justify-content-between justify-content-center align-items-center"
+        >
+          <article
+            class="contact__form col-lg-6 d-flex justify-content-center align-items-center mb-5 mb-lg-0"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            <h2 class="title-primary vertical">Contactános</h2>
+            <form
+              class="form__paper"
+              data-aos="zoom-in"
+              data-aos-duration="1000"
             >
-              <h2 class="text-overline">TOTAL</h2>
-              <h2 class="text-overline" id="total"></h2>
+              <div class="input__box">
+                <label for="name" class="form__label">Nombre y Apellido</label>
+                <input type="text" id="name" class="form__input" required="" />
+              </div>
+              <div class="input__box">
+                <label for="email" class="form__label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form__input"
+                  required=""
+                />
+              </div>
+              <div class="input__box">
+                <label for="message" class="form__label">Mensaje</label>
+                <textarea
+                  id="message"
+                  class="form__input"
+                  rows="6"
+                  column="10"
+                  required=""
+                ></textarea>
+              </div>
+              <button type="submit" class="btn-principal">
+                <i class="fa fa-paper-plane"></i> Enviar
+              </button>
+            </form>
+          </article>
+
+          <article
+            class="contact__location col-lg-5 d-flex justify-content-center align-items-center mt-5 mt-lg-0"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            <div class="iframe__container">
+              <div class="iframe__box">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2024.4648465779292!2d-63.0508337415102!3d-31.421551452447495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94334dd9def7613f%3A0xda264072985ac5f3!2sRivadavia%20286%2C%20X2434%20Arroyito%2C%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1649901013386!5m2!1ses-419!2sar"
+                  title="Ubicacion"
+                  width="100%"
+                  height="100%"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <span></span>
+              </div>
             </div>
           </article>
         </div>
@@ -435,7 +420,7 @@
     <footer class="footer">
       <div class="container">
         <div class="footer__info flex-column flex-md-row">
-          <a href="../../index.html" aria-label="Navegar a la página de inicio"
+          <a href="./index.html" aria-label="Navegar a la página de Inicio"
             ><i class="fas fa-home"></i
           ></a>
 
@@ -493,5 +478,4 @@
     AOS.init();
   </script>
   <script src="./assets/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="./assets/js/index.js"></script>
 </html>
