@@ -21,7 +21,7 @@
   </head>
   <body class="bg-bricks">
     <header class="bg-bricks">
-      <nav class="navbar container flex-row navbar-expand-lg">
+      <nav class="navbar container flex-row navbar-expand-lg navbar-light">
         <a href="../../index.html">
           <picture class="logo flex-row">
             <img
@@ -32,6 +32,7 @@
             />
           </picture>
         </a>
+
         <button
           class="navbar-toggler"
           type="button"
@@ -47,7 +48,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-lg-auto">
             <li>
-              <a href="products.html" class="menu__link">Productos</a>
+              <a href="./products.html" class="menu__link">Productos</a>
             </li>
             <li>
               <a href="../../index.html#help" class="menu__link">Ayuda</a>
@@ -66,22 +67,21 @@
               ></a>
               <ul class="sub-menu bg-bricks">
                 <li>
-                  <a href="login.html" class="menu__link">Ingresar</a>
+                  <a href="./login.html" class="menu__link">Ingresar</a>
                 </li>
                 <li>
-                  <a href="register.html" class="menu__link menu__link--active"
+                  <a
+                    href="./register.html"
+                    class="menu__link menu__link--active"
                     >Registrarse</a
                   >
                 </li>
               </ul>
             </li>
             <li>
-              <a
-                href="cart.html"
-                class="menu__link"
-                aria-label="Carrito de compras"
-                ><i class="fas fa-shopping-bag text-white"></i
-              ></a>
+              <a href="./cart.html" class="menu__link menu__link--cart"
+                ><i class="fas fa-shopping-bag text-white"></i></a
+              ><span class="cart-quantity"></span>
             </li>
           </ul>
         </div>
@@ -245,11 +245,11 @@
     </footer>
   </body>
 
-  <script src="../js/aos.js"></script>
+  <script src="../js/lib/aos.js"></script>
   <script>
     AOS.init();
   </script>
-  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/lib/bootstrap.bundle.min.js"></script>
   <script src="../js/classes/User.js"></script>
-  <script src="../js/pages/sign.js"></script>
+  <script src="../js/pages/register.js"></script>
 </html>

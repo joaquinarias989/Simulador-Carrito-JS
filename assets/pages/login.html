@@ -21,7 +21,7 @@
   </head>
   <body class="bg-bricks">
     <header class="bg-bricks">
-      <nav class="navbar container flex-row navbar-expand-lg">
+      <nav class="navbar container flex-row navbar-expand-lg navbar-light">
         <a href="../../index.html">
           <picture class="logo flex-row">
             <img
@@ -32,6 +32,7 @@
             />
           </picture>
         </a>
+
         <button
           class="navbar-toggler"
           type="button"
@@ -47,7 +48,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-lg-auto">
             <li>
-              <a href="products.html" class="menu__link">Productos</a>
+              <a href="./products.html" class="menu__link">Productos</a>
             </li>
             <li>
               <a href="../../index.html#help" class="menu__link">Ayuda</a>
@@ -66,23 +67,19 @@
               ></a>
               <ul class="sub-menu bg-bricks">
                 <li>
-                  <a href="login.html" class="menu__link menu__link--active"
+                  <a href="./login.html" class="menu__link menu__link--active"
                     >Ingresar</a
                   >
                 </li>
                 <li>
-                  <a href="register.html" class="menu__link">Registrarse</a>
+                  <a href="./register.html" class="menu__link">Registrarse</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a
-                href="cart.html"
-                role="button"
-                class="menu__link"
-                aria-label="Carrito de compras"
-                ><i class="fas fa-shopping-bag text-white"></i
-              ></a>
+              <a href="./cart.html" class="menu__link menu__link--cart"
+                ><i class="fas fa-shopping-bag text-white"></i></a
+              ><span class="cart-quantity"></span>
             </li>
           </ul>
         </div>
@@ -99,16 +96,23 @@
         <h1 class="title-primary">Iniciar Sesión</h1>
         <div class="row justify-content-between mt-5">
           <div class="col-md-7 col-lg-6">
-            <form class="form__paper">
+            <form class="form__paper" id="formLogin">
               <div class="input__box">
                 <label for="email" class="form__label">Email</label>
-                <input type="email" id="email" class="form__input" required />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form__input"
+                  required
+                />
               </div>
               <div class="input__box">
                 <label for="password" class="form__label">Contraseña</label>
                 <input
                   type="password"
                   id="password"
+                  name="password"
                   class="form__input"
                   required
                 />
@@ -137,7 +141,11 @@
           </div>
         </div>
       </section>
-
+      <dialog id="modal-alert" class="modal-alert">
+        <i></i>
+        <h3></h3>
+        <button class="btn-principal">OK</button>
+      </dialog>
       <div
         class="modal fade"
         id="modalRecover"
@@ -243,9 +251,12 @@
     </footer>
   </body>
 
-  <script src="../js/aos.js"></script>
+  <script src="../js/lib/aos.js"></script>
   <script>
     AOS.init();
   </script>
-  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/lib/bootstrap.bundle.min.js"></script>
+  <script src="../js/modal.js"></script>
+  <script src="../js/classes/User.js"></script>
+  <script src="../js/pages/login.js"></script>
 </html>

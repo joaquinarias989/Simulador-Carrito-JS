@@ -21,3 +21,19 @@ const usuario1 = new Usuario(
 );
 
 let users = [usuario1];
+
+if (localStorage.getItem("user")) {
+  let userRegistered = JSON.parse(localStorage.getItem("user"));
+
+  if (!users.find((u) => u.email === userRegistered.email)) {
+    const newUser = new Usuario(
+      userRegistered.nombre,
+      userRegistered.email,
+      userRegistered.contraseña,
+      userRegistered.codpostal,
+      userRegistered.provincia,
+      userRegistered.domicilio
+    );
+    users.push(newUser);
+  }
+}
