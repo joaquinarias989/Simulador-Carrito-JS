@@ -7,11 +7,11 @@ const showModalAlert = (type, text) => {
   if (type == "success") {
     modalIcon.setAttribute("class", "fa fa-check");
     modalBtn.remove();
-  } else if (type == "warning") modalIcon.setAttribute("class", "fa fa-info");
+  } else if (type == "warning")
+    modalIcon.setAttribute("class", "fa fa-exclamation");
   else if (type == "error") modalIcon.setAttribute("class", "fa fa-times");
 
   modal.querySelector("h3").textContent = text;
-
   modal.showModal();
 };
 

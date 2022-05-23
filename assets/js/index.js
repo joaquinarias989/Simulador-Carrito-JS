@@ -37,7 +37,7 @@ const showProducts = (by) => {
 
         const clone = templateProduct.cloneNode(true);
 
-        const alertOK = clone.querySelector("#alertOK");
+        // const alertOK = clone.querySelector("#alertOK");
         clone
           .querySelector(".btn-cart")
           .addEventListener("click", () => addProductToCart(prod, alertOK));
@@ -58,14 +58,14 @@ const updateProds = () => {
 };
 
 ////////////////////// Muestra el aviso de "Producto agregado exitosamente"
-const showToast = (alertOK) => {
-  alertOK.classList.add("active");
-  if (alertOK.classList.contains("active")) {
-    setTimeout(() => {
-      alertOK.classList.remove("active");
-    }, 500);
-  }
-};
+// const showToast = (alertOK) => {
+//   alertOK.classList.add("active");
+//   if (alertOK.classList.contains("active")) {
+//     setTimeout(() => {
+//       alertOK.classList.remove("active");
+//     }, 500);
+//   }
+// };
 
 ////////////////////// Actualiza los Totales y el Local Storage
 const updateTotal = () => {

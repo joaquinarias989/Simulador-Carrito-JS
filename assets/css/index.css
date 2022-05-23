@@ -409,12 +409,11 @@ main {
   justify-content: end;
   transition: all 0.3s ease-in-out;
 }
-.product__card__info .product__card__btn span {
+/* .product__card__info .product__card__btn span {
   position: absolute;
   font-size: 1.75rem;
   color: rgba(0, 0, 0);
   padding: 0.2rem 2rem;
-  /* bottom: 15rem; */
   top: 2rem;
   right: -1rem;
   opacity: 0;
@@ -426,7 +425,7 @@ main {
 .product__card__info .product__card__btn span.active {
   opacity: 1;
   visibility: visible;
-}
+} */
 .product__card__info .product__card__btn .btn-cart {
   display: flex;
   justify-content: end;
@@ -1609,6 +1608,19 @@ main.bg-bricks {
   background-color: #00000095;
 }
 .modal-alert i {
-  font-size: 4em;
+  font-size: 4.2em;
   color: #ffda07;
+}
+.toastify {
+  font-size: 1.6em;
+}
+.toastify.info {
+  padding: 0.7rem 1.2rem;
+  background: #ffda07;
+  color: #000;
+  font-weight: bold;
+  max-width: 100%;
+}
+.swal2-container.swal2-center > .swal2-popup {
+  font-size: 1.6em;
 }

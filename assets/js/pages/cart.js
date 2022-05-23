@@ -69,100 +69,59 @@ const updateCart = () => {
 };
 
 ////////////////////// Añade un producto al Carrito
-const addProductToCart = (prod, alertOK) => {
+const addProductToCart = (prod) => {
   if (prod.stock <= 0) {
-    showModalAlert(
-      "warning",
-      "No tenemos más stock del producto por el momento, disculpe"
-    );
+    // showModalAlert(
+    //   "warning",
+    //   "No tenemos más stock del producto por el momento, disculpe"
+    // );
+    Swal.fire({
+      text: "No tenemos más stock del producto por el momento, disculpe",
+      icon: "warning",
+      iconColor: "#ffda07",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ffda07",
+    });
     showProducts();
     return;
   }
 
   prod.stock -= 1;
   prod.cantidad += 1;
-  showToast(alertOK);
 
   if (cart.some((p) => p.id == prod.id)) {
     let indice = cart.findIndex((index) => index.id == prod.id);
     cart[indice].cantidad = prod.cantidad;
     cart[indice].stock = prod.stock;
+  } else cart.push(prod);
 
-    const elements = listCart.getElementsByClassName("cart__product");
-
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].id === prod.id) {
-        let elementQuantity = elements[i].querySelector(".input-quantity");
-        elementQuantity.textContent = prod.cantidad;
-        elements[i]
-          .querySelector(".cart__product #reduceOne")
-          .classList.remove("d-none");
-        elements[i]
-          .querySelector(".cart__product #removeProd")
-          .classList.add("d-none");
-
-        updateTotal();
-        subtotalHtml.textContent = `$ ${subtotal}`;
-        totalHtml.textContent = `$ ${total}`;
-        return;
-      }
-    }
-  } else {
-    // cart.push(prod);
-    cart = [...cart, prod];
-
-    templateProductCart.querySelector(".cart__product").id = prod.id;
-
-    templateProductCart.querySelector("img").src = prod.img;
-
-    templateProductCart.querySelector(
-      ".cart__product #product__name"
-    ).textContent = prod.nombre;
-
-    templateProductCart.querySelector(
-      ".cart__product #details"
-    ).textContent = `${prod.color}, ${prod.talle}`;
-
-    templateProductCart.querySelector(
-      ".cart__product .input-quantity"
-    ).textContent = prod.cantidad;
-
-    templateProductCart.querySelector(
-      ".cart__product #price"
-    ).textContent = `$ ${prod.precio * prod.cantidad}`;
-
-    const clone = templateProductCart.cloneNode(true);
-
-    clone
-      .querySelector(".cart__product #addOne")
-      .addEventListener("click", () => increaseQuantity(prod));
-
-    clone
-      .querySelector(".cart__product #reduceOne")
-      .addEventListener("click", () => decreaseQuantity(prod));
-
-    clone
-      .querySelector(".cart__product #removeProd")
-      .addEventListener("click", () => decreaseQuantity(prod));
-
-    fragment.appendChild(clone);
-
-    listCart.appendChild(fragment);
-  }
-
+  Toastify({
+    text: "Producto agregado con éxito!",
+    className: "info",
+    duration: 1500,
+    stopOnFocus: false,
+    offset: {
+      y: "7rem",
+    },
+  }).showToast();
+  updateCart();
   showProducts();
-  updateTotal();
-  subtotalHtml.textContent = `$ ${subtotal}`;
-  totalHtml.textContent = `$ ${total}`;
 };
 
 ////////////////////// Aumenta un producto del Carrito
 const increaseQuantity = (prod) => {
   if (prod.stock <= 0) {
-    showModalAlert(
-      "warning",
-      "No tenemos más stock del producto por el momento, disculpe"
-    );
+    // showModalAlert(
+    //   "warning",
+    //   "No tenemos más stock del producto por el momento, disculpe"
+    // );
+    Swal.fire({
+      text: "No tenemos más stock del producto por el momento, disculpe",
+      icon: "warning",
+      iconColor: "#ffda07",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ffda07",
+    });
     showProducts();
     return;
   }
@@ -194,18 +153,16 @@ const increaseQuantity = (prod) => {
 
 ////////////////////// Disminuye un producto del Carrito
 const decreaseQuantity = (prod) => {
+  prod.stock++;
+  prod.cantidad--;
+
   const elements = listCart.getElementsByClassName("cart__product");
 
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].id === prod.id) {
-      if (prod.cantidad > 2) {
-        prod.stock++;
-        prod.cantidad--;
-        let elementQuantity = elements[i].querySelector(".input-quantity");
-        elementQuantity.textContent = prod.cantidad;
-      } else if (prod.cantidad == 2) {
-        prod.stock++;
-        prod.cantidad--;
+      let elementQuantity = elements[i].querySelector(".input-quantity");
+      elementQuantity.textContent = prod.cantidad;
+      if (prod.cantidad == 1) {
         elements[i]
           .querySelector(".cart__product #reduceOne")
           .classList.add("d-none");
@@ -215,8 +172,7 @@ const decreaseQuantity = (prod) => {
 
         let elementQuantity = elements[i].querySelector(".input-quantity");
         elementQuantity.textContent = prod.cantidad;
-      } else if (prod.cantidad == 1) {
-        prod.stock++;
+      } else if (prod.cantidad == 0) {
         prod.cantidad = 0;
         for (let c = 0; c < cart.length; c++) {
           cart[c] === prod && cart.splice(c, 1);
@@ -233,7 +189,6 @@ const decreaseQuantity = (prod) => {
   updateTotal();
   subtotalHtml.textContent = `$ ${subtotal}`;
   totalHtml.textContent = `$ ${total}`;
-  return;
 };
 
 ////////////////////// Lógica del Formulario que te lleva a terminar al compra por WhatsApp
@@ -250,10 +205,17 @@ formPurchase.addEventListener("submit", (e) => {
   e.preventDefault();
 
   if (cart.length == 0) {
-    showModalAlert(
-      "error",
-      "Debes agregar al menos 1 producto para realizar la compra"
-    );
+    // showModalAlert(
+    //   "error",
+    //   "Debes agregar al menos 1 producto para realizar la compra"
+    // );
+    Swal.fire({
+      text: "Debes agregar al menos 1 producto para realizar la compra",
+      icon: "error",
+      iconColor: "#ffda07",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ffda07",
+    });
     return;
   }
 
@@ -290,13 +252,23 @@ formPurchase.addEventListener("submit", (e) => {
   localStorage.removeItem("cart");
   localStorage.removeItem("user");
 
-  showModalAlert(
-    "success",
-    `Gracias ${formData.get(
+  // showModalAlert(
+  //   "success",
+  //   `Gracias ${formData.get(
+  //     "name"
+  //   )} por elegirnos. El total de tu compra es de ${totalHtml.textContent}.
+  //   Serás redireccionado en unos instantes.`
+  // );
+  Swal.fire({
+    text: `Gracias ${formData.get(
       "name"
-    )} por elegirnos. El total de tu compra es de ${totalHtml.textContent}.
-    Serás redireccionado en unos instantes.`
-  );
+    )} por elegirnos. El total de tu compra es de ${
+      totalHtml.textContent
+    }. Serás redireccionado en unos instantes.`,
+    icon: "success",
+    iconColor: "#ffda07",
+    showConfirmButton: false,
+  });
 
   setTimeout(() => {
     window.open(urlWpp, "_blank");
