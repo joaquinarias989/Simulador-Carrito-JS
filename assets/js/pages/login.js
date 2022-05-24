@@ -12,17 +12,11 @@ formLogin.addEventListener("submit", (e) => {
         u.contraseña === formData.get("password")
     )
   ) {
-    // showModalAlert(
-    //   "error",
-    //   "El Email y/o contraseña ingresados son incorrectos"
-    // );
-    Swal.fire({
-      text: "El Email y/o contraseña ingresados son incorrectos",
-      icon: "error",
-      iconColor: "#ffda07",
-      confirmButtonText: "OK",
-      confirmButtonColor: "#ffda07",
-    });
+    showModalAlert(
+      "error",
+      "El Email y/o contraseña ingresados son incorrectos"
+    );
+
     return;
   }
 
@@ -31,13 +25,7 @@ formLogin.addEventListener("submit", (e) => {
     JSON.stringify(users.find((u) => u.email == formData.get("email")))
   );
 
-  // showModalAlert("success", `Logueado exitosamente`);
-  Swal.fire({
-    text: "Logueado exitosamente",
-    icon: "success",
-    iconColor: "#ffda07",
-    showConfirmButton: false,
-  });
+  showModalAlert("success", "Logueado exitosamente");
 
   setTimeout(() => {
     window.location.href = "./cart.html";

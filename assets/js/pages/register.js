@@ -6,17 +6,11 @@ formRegister.addEventListener("submit", (e) => {
   const formData = new FormData(formRegister);
 
   if (users.find((u) => u.email == formData.get("email"))) {
-    // showModalAlert(
-    //   "error",
-    //   "El email ingresado ya está registrado en nuestra Web"
-    // );
-    Swal.fire({
-      text: "El email ingresado ya está registrado en nuestra Web",
-      icon: "error",
-      iconColor: "#ffda07",
-      confirmButtonText: "OK",
-      confirmButtonColor: "#ffda07",
-    });
+    showModalAlert(
+      "error",
+      "El email ingresado ya está registrado en nuestra Web"
+    );
+
     return;
   }
 
@@ -32,16 +26,10 @@ formRegister.addEventListener("submit", (e) => {
   users.push(newUser);
   localStorage.setItem("user", JSON.stringify(newUser));
 
-  // showModalAlert(
-  //   "success",
-  //   `Gracias ${users[users.length - 1].nombre} por registrarte.`
-  // );
-  Swal.fire({
-    text: `Gracias ${users[users.length - 1].nombre} por registrarte.`,
-    icon: "success",
-    iconColor: "#ffda07",
-    showConfirmButton: false,
-  });
+  showModalAlert(
+    "success",
+    `Gracias ${users[users.length - 1].nombre} por registrarte.`
+  );
 
   setTimeout(() => {
     window.location.href = "./cart.html";

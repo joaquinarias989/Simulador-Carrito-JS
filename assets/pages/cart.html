@@ -26,7 +26,7 @@
   </head>
   <body>
     <header class="bg-bricks">
-      <nav class="navbar container flex-row navbar-expand-lg navbar-light">
+      <nav class="navbar container flex-row navbar-expand-lg">
         <a href="../../index.html">
           <picture class="logo flex-row">
             <img
@@ -37,7 +37,6 @@
             />
           </picture>
         </a>
-
         <button
           class="navbar-toggler"
           type="button"
@@ -53,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-lg-auto">
             <li>
-              <a href="./products.html" class="menu__link">Productos</a>
+              <a href="products.html" class="menu__link">Productos</a>
             </li>
             <li>
               <a href="../../index.html#help" class="menu__link">Ayuda</a>
@@ -67,20 +66,23 @@
           </ul>
           <ul class="navbar-nav mb-2 mb-lg-0 flex-row jc-between">
             <li class="dropdown-link">
-              <a class="menu__link" role="button" aria-label="Cuenta de Usuario"
+              <a class="menu__link" role="button"
                 ><i class="fas fa-user text-white"></i
               ></a>
               <ul class="sub-menu bg-bricks">
                 <li>
-                  <a href="./login.html" class="menu__link">Ingresar</a>
+                  <a href="login.html" class="menu__link">Ingresar</a>
                 </li>
                 <li>
-                  <a href="./register.html" class="menu__link">Registrarse</a>
+                  <a href="register.html" class="menu__link">Registrarse</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="./cart.html" class="menu__link menu__link--cart"
+              <a
+                href="cart.html"
+                class="menu__link menu__link--active me-0"
+                aria-label="Carrito de compras"
                 ><i class="fas fa-shopping-bag text-white"></i></a
               ><span class="cart-quantity"></span>
             </li>
@@ -97,6 +99,7 @@
         data-aos-duration="1000"
       >
         <h1 class="title-primary">Iniciar Compra</h1>
+
         <div class="row justify-content-between w-100">
           <article class="cart__data col-md-6 flex-column">
             <div id="accordionData">
@@ -121,7 +124,7 @@
                 >
                   <div class="flex-row jc-between algn-items-center mt-4">
                     <p>Correo Argentino - Envío a Domicilio</p>
-                    <span class="text-overline" id="ship-data"></span>
+                    <span class="text-overline" id="ship-data">$ 475</span>
                   </div>
                 </div>
               </div>
@@ -151,19 +154,17 @@
                       >
                     </p>
                     <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      class="form__input mt-5"
-                      placeholder="Email"
+                      type="text"
+                      name="name"
+                      class="form__input"
+                      placeholder="Nombre y Apellido"
                       required
                     />
                     <input
-                      type="text"
-                      name="name"
-                      id="name"
+                      type="email"
+                      name="email"
                       class="form__input"
-                      placeholder="Nombre y Apellido"
+                      placeholder="Email"
                       required
                     />
                     <div class="flex-row jc-between">
@@ -260,24 +261,17 @@
           >
             <div class="cart__resume__products flex-column">
               <template id="product-cart">
-                <div
-                  class="cart__product"
-                  data-aos="fade-down"
-                  data-aos-duration="500"
-                >
+                <div class="cart__product">
                   <div class="cart__product__img">
-                    <img src="./assets/img/img-ejemplo.png" />
+                    <img src="../img/buzo-2.webp" />
                   </div>
                   <div class="cart__product__info">
-                    <h3
-                      class="cart__product__title text-underlined"
-                      id="product__name"
-                    ></h3>
-                    <p id="details"></p>
-                    <div class="d-flex algn-items-center jc-between gap-3 pe-3">
+                    <h3 class="cart__product__title text-underlined"></h3>
+                    <p class="cart__product__details"></p>
+                    <div class="d-flex algn-items-center jc-between gap-1">
                       <p>
                         Cantidad:
-                        <span class="input-quantity"></span>
+                        <span class="cart__product__quantity"></span>
                       </p>
                       <div class="d-flex algn-items-center btn-group">
                         <button id="addOne" class="btn-principal">
@@ -291,7 +285,7 @@
                         </button>
                       </div>
                     </div>
-                    <h3 id="price"></h3>
+                    <h3 class="cart__product__price"></h3>
                   </div>
                 </div>
               </template>
@@ -314,13 +308,13 @@
           </article>
         </div>
       </section>
-
-      <dialog id="modal-alert" class="modal-alert">
-        <i></i>
-        <h3></h3>
-        <button class="btn-principal">OK</button>
-      </dialog>
     </main>
+
+    <dialog id="modal-alert" class="modal-alert">
+      <i></i>
+      <h3></h3>
+      <button class="btn-principal">OK</button>
+    </dialog>
 
     <section id="interes" class="interes bg-bricks">
       <div class="container">
@@ -346,7 +340,6 @@
                     >
                       Agregar al carrito <i class="fa fa-cart-plus"></i>
                     </button>
-                    <span id="alertOK"></span>
                   </div>
                 </div>
               </a>
@@ -417,14 +410,13 @@
     AOS.init();
   </script>
   <script src="../js/lib/bootstrap.bundle.min.js"></script>
-  <script src="../js/classes/Product.js"></script>
   <script src="../js/classes/User.js"></script>
+  <script src="../js/classes/Product.js"></script>
   <script src="../js/modal.js"></script>
   <script src="../js/index.js"></script>
   <script
     type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/toastify-js"
   ></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="../js/pages/cart.js"></script>
 </html>
