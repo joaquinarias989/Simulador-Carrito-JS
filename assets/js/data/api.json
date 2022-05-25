@@ -1,0 +1,51 @@
+
+[
+   { 
+    "id": "RMPN",
+    "nombre":"Remera Phenomenally",
+    "precio": 2380,
+    "descripcion": "Lorem ipsum dolor",
+    "color": "Negro",
+    "talle": "M",
+    "stock": 2,
+    "img": "../img/shirt-yellow.webp",
+    "cantidad": 0,
+    "categoria": "Remeras"
+    },
+  {
+    "id": "RRDA",
+    "nombre": "Remera Risks and Dreams",
+    "precio": 2499,
+    "descripcion": "Lorem ipsum dolor",
+    "color": "Amarillo",
+    "talle": "XL",
+    "stock": 3,
+    "img": "../img/tshirt-2.webp",
+    "cantidad": 0,
+    "categoria": "Remeras"
+},
+  {
+    "id": "BCN",
+   "nombre":  "Buzo Chineze",
+    "precio": 4630,
+    "descripcion": "Lorem ipsum dolor",
+    "color": "Negro",
+    "talle": "L",
+    "stock": 2,
+    "img": "../img/buzo.webp",
+    "cantidad": 0,
+    "categoria": "Buzos"
+},
+  {
+    "id": "JBN",
+    "nombre": "Jacket Bomber",
+    "precio": 5500,
+    "descripcion": "Lorem ipsum dolor",
+    "color": "Negro",
+   "talle":  "S",
+   "stock":  2,
+   "img":  "../img/campera.webp",
+   "cantidad":  0,
+   "categoria":  "Camperas"
+}
+]
