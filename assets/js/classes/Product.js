@@ -28,53 +28,53 @@ class Producto {
 
 ////////////////////// Productos de prueba
 
-const prod1 = new Producto(
-  "RMPN",
-  "Remera Phenomenally",
-  2380,
-  "Lorem ipsum dolor",
-  "Negro",
-  "M",
-  2,
-  "../img/shirt-yellow.webp",
-  0,
-  "Remeras"
-);
-const prod2 = new Producto(
-  "RRDA",
-  "Remera Risks and Dreams",
-  2499,
-  "Lorem ipsum dolor",
-  "Amarillo",
-  "XL",
-  3,
-  "../img/tshirt-2.webp",
-  0,
-  "Remeras"
-);
-const prod3 = new Producto(
-  "BCN",
-  "Buzo Chineze",
-  4630,
-  "Lorem ipsum dolor",
-  "Negro",
-  "L",
-  2,
-  "../img/buzo.webp",
-  0,
-  "Buzos"
-);
-const prod4 = new Producto(
-  "JBN",
-  "Jacket Bomber",
-  5500,
-  "Lorem ipsum dolor",
-  "Negro",
-  "S",
-  2,
-  "../img/campera.webp",
-  0,
-  "Camperas"
-);
+// const prod1 = new Producto(
+//   "RMPN",
+//   "Remera Phenomenally",
+//   2380,
+//   "Lorem ipsum dolor",
+//   "Negro",
+//   "M",
+//   2,
+//   "../img/shirt-yellow.webp",
+//   0,
+//   "Remeras"
+// );
+// const prod2 = new Producto(
+//   "RRDA",
+//   "Remera Risks and Dreams",
+//   2499,
+//   "Lorem ipsum dolor",
+//   "Amarillo",
+//   "XL",
+//   3,
+//   "../img/tshirt-2.webp",
+//   0,
+//   "Remeras"
+// );
+// const prod3 = new Producto(
+//   "BCN",
+//   "Buzo Chineze",
+//   4630,
+//   "Lorem ipsum dolor",
+//   "Negro",
+//   "L",
+//   2,
+//   "../img/buzo.webp",
+//   0,
+//   "Buzos"
+// );
+// const prod4 = new Producto(
+//   "JBN",
+//   "Jacket Bomber",
+//   5500,
+//   "Lorem ipsum dolor",
+//   "Negro",
+//   "S",
+//   2,
+//   "../img/campera.webp",
+//   0,
+//   "Camperas"
+// );
 
-let products = [prod1, prod2, prod3, prod4];
+let products = [];

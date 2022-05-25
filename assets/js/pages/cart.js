@@ -6,13 +6,6 @@ const templateProduct = document.getElementById("product-card").content;
 
 ////////////////////// Lógica del Formulario que te lleva a terminar al compra por WhatsApp
 const formPurchase = document.getElementById("formPurchase");
-if (user.hasOwnProperty("nombre")) {
-  formPurchase.elements["email"].value = user.email;
-  formPurchase.elements["name"].value = user.nombre;
-  formPurchase.elements["postalcode"].value = user.codpostal;
-  formPurchase.elements["province"].value = user.provincia;
-  formPurchase.elements["address"].value = user.domicilio;
-}
 
 formPurchase.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -78,17 +71,26 @@ formPurchase.addEventListener("submit", (e) => {
 
 const init = () => {
   try {
-    document.addEventListener("DOMContentLoaded", () => {
+    shipInfo.textContent = `$ ${ship}`;
+    shipCart.textContent = `$ ${ship}`;
+
+    if (user.hasOwnProperty("nombre")) {
+      formPurchase.elements["email"].value = user.email;
+      formPurchase.elements["name"].value = user.nombre;
+      formPurchase.elements["postalcode"].value = user.codpostal;
+      formPurchase.elements["province"].value = user.provincia;
+      formPurchase.elements["address"].value = user.domicilio;
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      await fetchData();
+
       if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
-        updateProds();
         updateCart();
       }
       showProducts();
     });
-
-    shipInfo.textContent = `$ ${ship}`;
-    shipCart.textContent = `$ ${ship}`;
   } catch (error) {
     showModalAlert("error", error);
   }

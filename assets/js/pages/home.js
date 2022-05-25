@@ -15,6 +15,15 @@ const templateProductCart = document.getElementById("product-cart").content;
 
 const fragment = document.createDocumentFragment();
 
+////////////////////// Consume la "API" de Productos
+const fetchData = async () => {
+  const res = await fetch("./assets/js/data/api.json");
+  const data = await res.json();
+
+  products = [...data];
+  updateProds();
+};
+
 ////////////////////// Pinta el Carrito
 const updateCart = () => {
   listCart.innerHTML = "";
@@ -23,10 +32,13 @@ const updateCart = () => {
 
     templateProductCart.querySelector(".cart__product").id = prod.id;
 
-    if (window.location.href.includes("index.html"))
+    if (
+      window.location.pathname == "/" ||
+      window.location.href.includes("index.html")
+    )
       templateProductCart.querySelector("img").src = prod.img.replace(
         "..",
-        "./assets"
+        "./assets/"
       );
     else templateProductCart.querySelector("img").src = prod.img;
 
@@ -91,12 +103,11 @@ const increaseQuantity = (prod) => {
   products[products.findIndex((p) => p.id == prod.id)].stock = prod.stock;
 
   const elements = listCart.getElementsByClassName("cart__product");
+
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].id === prod.id) {
-      let elementQuantity = elements[i].querySelector(
-        ".cart__product__quantity"
-      );
-      elementQuantity.textContent = prod.cantidad;
+      elements[i].querySelector(".cart__product__quantity").textContent =
+        prod.cantidad;
       elements[i]
         .querySelector(".cart__product #reduceOne")
         .classList.remove("d-none");
@@ -114,24 +125,27 @@ const decreaseQuantity = (prod) => {
   prod.stock++;
   prod.cantidad--;
 
+  products[products.findIndex((p) => p.id == prod.id)].cantidad = prod.cantidad;
+  products[products.findIndex((p) => p.id == prod.id)].stock = prod.stock;
+
   const elements = listCart.getElementsByClassName("cart__product");
 
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].id === prod.id) {
-      let elementQuantity = elements[i].querySelector(
-        ".cart__product__quantity"
-      );
-      elementQuantity.textContent = prod.cantidad;
+      // Actualiza la cantidad en el html
+      elements[i].querySelector(".cart__product__quantity").textContent =
+        prod.cantidad;
+
       if (prod.cantidad == 1) {
+        // Muestra el boton de Eliminar
         elements[i]
           .querySelector(".cart__product #reduceOne")
           .classList.add("d-none");
         elements[i]
           .querySelector(".cart__product #removeProd")
           .classList.remove("d-none");
-
-        elementQuantity.textContent = prod.cantidad;
       } else if (prod.cantidad == 0) {
+        // Elimina el prod del carrito
         prod.cantidad = 0;
         for (let c = 0; c < cart.length; c++) {
           cart[c] === prod && cart.splice(c, 1);
@@ -141,18 +155,7 @@ const decreaseQuantity = (prod) => {
     }
   }
 
-  products[products.findIndex((p) => p.id == prod.id)].cantidad = prod.cantidad;
-  products[products.findIndex((p) => p.id == prod.id)].stock = prod.stock;
-
   updateTotal();
-};
-
-////////////////////// Actualiza la cantidad y el stock de cada producto según quedó guardado en el carrito
-const updateProds = () => {
-  cart.forEach((prod) => {
-    products.find((p) => p.id == prod.id).cantidad = prod.cantidad;
-    products.find((p) => p.id == prod.id).stock = prod.stock;
-  });
 };
 
 ////////////////////// Actualiza los Totales y el Local Storage
@@ -177,12 +180,21 @@ const updateTotal = () => {
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
+////////////////////// Actualiza la cantidad y el stock de cada producto según quedó guardado en el carrito
+const updateProds = () => {
+  cart.forEach((prod) => {
+    products.find((p) => p.id == prod.id).cantidad = prod.cantidad;
+    products.find((p) => p.id == prod.id).stock = prod.stock;
+  });
+};
+
 const init = () => {
   try {
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+      await fetchData();
+
       if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
-        updateProds();
         updateCart();
       }
     });

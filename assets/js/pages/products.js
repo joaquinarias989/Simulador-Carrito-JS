@@ -11,7 +11,9 @@ inputSearch.addEventListener("input", () => showProducts(inputSearch.value));
 //////////////////////
 const init = () => {
   try {
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+      await fetchData();
+
       if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
         updateCart();
