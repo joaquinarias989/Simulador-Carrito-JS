@@ -17,7 +17,13 @@ const fragment = document.createDocumentFragment();
 
 ////////////////////// Consume la "API" de Productos
 const fetchData = async () => {
-  const res = await fetch("./assets/js/data/api.json");
+  let ruta = "";
+
+  window.location.pathname == "/" || window.location.href.includes("index.html")
+    ? (ruta = "./assets/js/data/api.json")
+    : (ruta = "../js/data/api.json");
+
+  const res = await fetch(ruta);
   const data = await res.json();
 
   products = [...data];
