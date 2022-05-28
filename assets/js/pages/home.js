@@ -21,7 +21,7 @@ const fetchData = async () => {
 
   window.location.pathname == "/" || window.location.href.includes("index.html")
     ? (ruta = "./assets/data/data.json")
-    : (ruta = "../data/api.json");
+    : (ruta = "../data/data.json");
 
   const res = await fetch(ruta);
   const data = await res.json();
