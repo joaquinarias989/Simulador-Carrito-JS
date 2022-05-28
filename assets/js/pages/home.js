@@ -20,12 +20,13 @@ const fetchData = async () => {
   let ruta = "";
 
   window.location.pathname == "/" || window.location.href.includes("index.html")
-    ? (ruta = "./assets/js/data/api.json")
-    : (ruta = "../js/data/api.json");
+    ? (ruta = "./assets/data/data.json")
+    : (ruta = "../data/api.json");
 
   const res = await fetch(ruta);
   const data = await res.json();
 
+  //Paso la data al array de products para trabajar dinamicamente sin alterar la data original, hasta que el usuario compre realmente.
   products = [...data];
   updateProds();
 };
@@ -138,12 +139,10 @@ const decreaseQuantity = (prod) => {
 
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].id === prod.id) {
-      // Actualiza la cantidad en el html
       elements[i].querySelector(".cart__product__quantity").textContent =
         prod.cantidad;
 
       if (prod.cantidad == 1) {
-        // Muestra el boton de Eliminar
         elements[i]
           .querySelector(".cart__product #reduceOne")
           .classList.add("d-none");
@@ -151,7 +150,6 @@ const decreaseQuantity = (prod) => {
           .querySelector(".cart__product #removeProd")
           .classList.remove("d-none");
       } else if (prod.cantidad == 0) {
-        // Elimina el prod del carrito
         prod.cantidad = 0;
         for (let c = 0; c < cart.length; c++) {
           cart[c] === prod && cart.splice(c, 1);
