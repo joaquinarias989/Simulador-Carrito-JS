@@ -2,4 +2,4 @@
 
 ## Proyecto JS - Coderhouse
 
-### [DEPLOY](https://joaquinarias989.github.io/Simulador-Carrito-JS/)
+### [DEPLOY](https://street-wear.netlify.app/)
