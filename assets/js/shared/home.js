@@ -1,34 +1,37 @@
-////////////////////// Arrays, Variables,  DOM
-let user = JSON.parse(localStorage.getItem("user")) ?? {};
-let cart = JSON.parse(localStorage.getItem("cart")) ?? [];
-
-let subtotal = 0;
-let total = 0;
-let totalQuantity = 0;
-let ship = 475;
-
-const subtotalHtml = document.getElementById("subtotal");
-const totalHtml = document.getElementById("total");
-
-const listCart = document.querySelector(".cart__resume__products");
-const templateProductCart = document.getElementById("product-cart").content;
-
-const fragment = document.createDocumentFragment();
-
 ////////////////////// Consume la "API" de Productos
 const fetchData = async () => {
   let ruta = "";
-
   window.location.pathname == "/" || window.location.href.includes("index.html")
     ? (ruta = "./assets/data/data.json")
-    : (ruta = "../data/data.json");
+    : (ruta = ".././data/data.json");
 
   const res = await fetch(ruta);
   const data = await res.json();
 
-  //Paso la data al array de products para trabajar dinamicamente sin alterar la data original, hasta que el usuario compre realmente.
   products = [...data];
   updateProds();
+};
+
+////////////////////// Actualiza los Totales y el Local Storage
+const updateTotal = () => {
+  let showQuantity = document.querySelector(".cart-quantity");
+
+  subtotal = cart.reduce(
+    (acc, { cantidad, precio }) => acc + cantidad * precio,
+    0
+  );
+  totalQuantity = cart.reduce((acc, { cantidad }) => acc + cantidad, 0);
+
+  total = subtotal + ship;
+
+  totalQuantity == 0
+    ? (showQuantity.textContent = "")
+    : (showQuantity.textContent = totalQuantity);
+
+  subtotalHtml.textContent = `$ ${subtotal}`;
+  totalHtml.textContent = `$ ${total}`;
+
+  localStorage.setItem("cart", JSON.stringify(cart));
 };
 
 ////////////////////// Pinta el Carrito
@@ -160,28 +163,6 @@ const decreaseQuantity = (prod) => {
   }
 
   updateTotal();
-};
-
-////////////////////// Actualiza los Totales y el Local Storage
-const updateTotal = () => {
-  let showQuantity = document.querySelector(".cart-quantity");
-
-  subtotal = cart.reduce(
-    (acc, { cantidad, precio }) => acc + cantidad * precio,
-    0
-  );
-  totalQuantity = cart.reduce((acc, { cantidad }) => acc + cantidad, 0);
-
-  total = subtotal + ship;
-
-  totalQuantity == 0
-    ? (showQuantity.textContent = "")
-    : (showQuantity.textContent = totalQuantity);
-
-  subtotalHtml.textContent = `$ ${subtotal}`;
-  totalHtml.textContent = `$ ${total}`;
-
-  localStorage.setItem("cart", JSON.stringify(cart));
 };
 
 ////////////////////// Actualiza la cantidad y el stock de cada producto según quedó guardado en el carrito

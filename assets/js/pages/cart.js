@@ -19,7 +19,7 @@ formPurchase.addEventListener("submit", (e) => {
   }
 
   const formData = new FormData(formPurchase);
-  const prodsWpp = cart
+  const prodsList = cart
     .map(
       (item) =>
         `Producto: ${item.nombre}\nColor: ${item.color}\nTalle: ${
@@ -30,7 +30,7 @@ formPurchase.addEventListener("submit", (e) => {
     )
     .join("\n\n");
 
-  const messageWpp = `Hola! Quiero realizar la siguiente compra:\n\n${prodsWpp}\n\nEnvío: $ ${ship}\n*Total a pagar: ${
+  const messageWpp = `Hola! Quiero realizar la siguiente compra:\n\n${prodsList}\n\nEnvío: $ ${ship}\n*Total a pagar: ${
     totalHtml.textContent
   }*\n\nDetallo mis datos:\n\nNombre: ${formData.get(
     "name"
@@ -49,19 +49,18 @@ formPurchase.addEventListener("submit", (e) => {
   );
 
   localStorage.removeItem("cart");
-  localStorage.removeItem("user");
 
   showModalAlert(
     "success",
     `Gracias ${formData.get(
       "name"
-    )} por elegirnos. El total de tu compra es de ${totalHtml.textContent}.
+    )} por elegirnos.\nEl total de tu compra es de ${totalHtml.textContent}.\n
     Serás redireccionado en unos instantes.`
   );
 
   setTimeout(() => {
+    window.open("../../index.html", "_self");
     window.open(urlWpp, "_blank");
-    window.location.reload();
   }, 5000);
 });
 

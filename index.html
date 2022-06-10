@@ -138,6 +138,13 @@
                   <h2 class="position-relative text-overline">TOTAL</h2>
                   <h2 class="position-relative text-overline" id="total"></h2>
                 </div>
+                <div class="text-center mt-3">
+                  <a
+                    href="./assets/pages/cart.html"
+                    class="position-relative text-underlined px-3"
+                    >Ir al Carrito
+                  </a>
+                </div>
               </div>
             </li>
           </ul>
@@ -170,7 +177,12 @@
               width="100%"
               height="100%"
             />
-            <button class="btn-secundario">Abrigos</button>
+            <a
+              class="btn-secundario"
+              type="button"
+              href="./assets/pages/products.html"
+              >Abrigos</a
+            >
           </article>
           <article class="flex-column">
             <img
@@ -179,7 +191,12 @@
               width="100%"
               height="100%"
             />
-            <button class="btn-secundario">Remeras</button>
+            <a
+              class="btn-secundario"
+              type="button"
+              href="./assets/pages/products.html"
+              >Remeras</a
+            >
           </article>
           <article class="flex-column">
             <img
@@ -188,7 +205,12 @@
               width="100%"
               height="100%"
             />
-            <button class="btn-secundario">Pantalones</button>
+            <a
+              class="btn-secundario"
+              type="button"
+              href="./assets/pages/products.html"
+              >Pantalones</a
+            >
           </article>
         </div>
         <div class="flex-row mt-5" data-aos="fade-up" data-aos-duration="1000">
@@ -416,18 +438,28 @@
           >
             <h2 class="title-primary vertical">Contactános</h2>
             <form
+              id="formContact"
+              action="https://formsubmit.co/aef81cd42c97cf0e3e57027a645cff68"
+              method="POST"
               class="form__paper"
               data-aos="zoom-in"
               data-aos-duration="1000"
             >
               <div class="input__box">
                 <label for="name" class="form__label">Nombre y Apellido</label>
-                <input type="text" id="name" class="form__input" required="" />
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  class="form__input"
+                  required=""
+                />
               </div>
               <div class="input__box">
                 <label for="email" class="form__label">Email</label>
                 <input
                   type="email"
+                  name="email"
                   id="email"
                   class="form__input"
                   required=""
@@ -436,6 +468,7 @@
               <div class="input__box">
                 <label for="message" class="form__label">Mensaje</label>
                 <textarea
+                  name="message"
                   id="message"
                   class="form__input"
                   rows="6"
@@ -446,6 +479,11 @@
               <button type="submit" class="btn-principal">
                 <i class="fa fa-paper-plane"></i> Enviar
               </button>
+
+              <!--Config FormSubmit-->
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="box" />
+              <input type="hidden" name="_subject" id="subject" />
             </form>
           </article>
 
@@ -534,11 +572,12 @@
     AOS.init();
   </script>
   <script src="./assets/js/lib/bootstrap.bundle.min.js"></script>
-  <script src="./assets/js/classes/Product.js"></script>
-  <script src="./assets/js/modal.js"></script>
+  <script src="./assets/js/shared/modal.js"></script>
+  <script src="./assets/js/shared/variables.js"></script>
   <script
     type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/toastify-js"
   ></script>
-  <script src="./assets/js/pages/home.js"></script>
+  <script src="./assets/js/shared/home.js"></script>
+  <script src="./assets/js/pages/contact.js"></script>
 </html>

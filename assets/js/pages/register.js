@@ -1,6 +1,6 @@
 const formRegister = document.getElementById("formRegister");
 
-formRegister.addEventListener("submit", (e) => {
+const signUp = (e) => {
   e.preventDefault();
 
   const formData = new FormData(formRegister);
@@ -34,4 +34,12 @@ formRegister.addEventListener("submit", (e) => {
   setTimeout(() => {
     window.location.href = "./cart.html";
   }, 3000);
-});
+};
+
+if (localStorage.getItem("user")) {
+  const userLoged = JSON.parse(localStorage.getItem("user"));
+  formRegister.innerHTML = `
+      <h2 class="text-center">Estás registrado como <span class="position-relative text-underlined px-3">${userLoged.nombre}</span>
+      </h2>
+        `;
+} else formRegister.addEventListener("submit", (e) => signUp(e));
