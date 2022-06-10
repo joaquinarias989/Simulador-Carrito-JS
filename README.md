@@ -1,5 +1,5 @@
-# Simulador Interactivo - Curso JS Coder
+# STREET WEAR - Ecommerce
 
-## Simulador Carrito de Compras.-
+## Proyecto JS - Coderhouse
 
-### [DEMO](https://joaquinarias989.github.io/Simulador-Carrito-JS/)
+### [DEPLOY](https://joaquinarias989.github.io/Simulador-Carrito-JS/)
